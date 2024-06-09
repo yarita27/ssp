@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ssp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
@@ -25,3 +26,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+=======
+# ssp
+Sistema de Sustentabilidad Pasantia 
+>>>>>>> 3ea4003176d533f7b13b9ac872b040dda830eb84
