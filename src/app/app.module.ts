@@ -13,12 +13,24 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { CriterioComponent } from './criterio/criterio.component';
 import { IndicadoresComponent } from './indicadores/indicadores.component';
-import { AppComponent } from './app.component'; // Import AppComponent
+import { AppComponent } from './app.component'; 
+import { MatrizAsignacionComponent } from './matriz-asignacion/matriz-asignacion.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { UnidadesComponent } from './unidades/unidades.component';
 
 
 @NgModule({
   declarations: [
-     
+
   ],
   imports: [
     BrowserModule,
@@ -34,7 +46,19 @@ import { AppComponent } from './app.component'; // Import AppComponent
     MatFormFieldModule,
     MatGridListModule,
     CriterioComponent,
-    IndicadoresComponent 
+    IndicadoresComponent,
+    MatrizAsignacionComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    MatPaginator,
+    BrowserAnimationsModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDialogModule,
+    MatSelectModule,
+    UnidadesComponent,
+    MatPaginatorModule
+
   ],
   providers: [],
 

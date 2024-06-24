@@ -1,27 +1,8 @@
 <p>HOLA</p>
 <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px;">
-  <mat-card style="width: 45%; padding: 20px;">
-    <h2>CRITERIOS</h2>
-    <mat-form-field appearance="outline" style="width: 100%;">
-      <mat-label>Critero ID</mat-label>
-      <input matInput placeholder="e.g., 26">
-    </mat-form-field>
-    <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
-      <mat-label>Nombre</mat-label>
-      <input matInput placeholder="Type here...">
-    </mat-form-field>
-    <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
-      <mat-label>Descripcion</mat-label>
-      <textarea matInput placeholder="Type here..."></textarea>
-    </mat-form-field>
-    <div style="display: flex; justify-content: space-between; margin-top: 20px;">
-      <button mat-raised-button color="primary">CREAR</button>
-      <button mat-raised-button color="accent">MODIFICAR</button>
-      <button mat-raised-button color="warn">ELIMINAR</button>
-    </div>
-  </mat-card>
+
   
-  <mat-card style="width: 50%; padding: 20px;">
+  <mat-card style="width: 100%; padding: 20px;">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID Criterio</th>
@@ -48,4 +29,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </mat-card>
+
+
+  
 </div>
