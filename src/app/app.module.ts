@@ -29,11 +29,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { UnidadesComponent } from './unidades/unidades.component';
 import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DialogUnidadesComponent } from './dialog-unidades/dialog-unidades.component';
 
 
 @NgModule({
   declarations: [
   ],
+
   imports: [
     BrowserModule,
     RouterModule,
@@ -62,8 +64,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatPaginatorModule,
     CommonModule,
     MatTooltipModule,
-    DashboardComponent
-
+    DashboardComponent,
+    DialogUnidadesComponent
   ],
   providers: [],
 

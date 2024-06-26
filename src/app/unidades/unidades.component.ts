@@ -6,6 +6,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatCard } from '@angular/material/card';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DialogUnidadesComponent } from '../dialog-unidades/dialog-unidades.component';
+import { MatButtonModule } from '@angular/material/button';
 
 export interface UnidadData {
   id: number;
@@ -27,7 +30,16 @@ const ELEMENT_DATA: UnidadData[] = [
   standalone: true,
   templateUrl: './unidades.component.html',
   styleUrls: ['./unidades.component.css'],
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule,MatCard, MatTableModule, MatPaginatorModule
+  imports: [
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatIconModule, 
+    MatCardModule,
+    MatCard, 
+    MatTableModule, 
+    MatPaginatorModule,
+    MatDialogModule,
+    MatButtonModule
   ]
 })
 export class UnidadesComponent implements AfterViewInit{
@@ -47,5 +59,12 @@ export class UnidadesComponent implements AfterViewInit{
       this.dataSource.paginator.firstPage();
     }
   }
+  constructor(public dialog: MatDialog) { }
+  openDialog() {
+    let dialogRef = this.dialog.open(DialogUnidadesComponent, {data:{name:'Yara'}});
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }

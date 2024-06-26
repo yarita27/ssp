@@ -1,11 +1,7 @@
 <div class="unidades-container">
-  <h3>Gestión de Usuarios</h3>
-
-  <mat-card style="width: 100%;  padding: 20px;">
-
-    <button mat-raised-button color="primary" height="50px" width="50px">Agregar Usuario</button>
-    
-  </mat-card>  
+  <h3 style="justify-content: center; padding-left: 20px;">Gestión de Usuarios</h3>
+  
+  <!-- <mat-card style= "display : flex; width: 100%;  padding: 20px; justify-content: space-between; margin-top: 20px;"></mat-card>  -->
 
 
   <mat-card style="width: 100%; padding: 20px; display: flex; justify-content: space-between; margin-top: 20px;">
@@ -14,7 +10,7 @@
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
     </mat-form-field>
-
+    <div style="justify-content: end;"><button mat-raised-button color="primary" height="50px" width="50px" (click)="openDialog()">Agregar Usuario</button></div>
     <!-- <button mat-raised-button color="primary"  width="10%"  >Agregar Usuario</button> -->
     
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
