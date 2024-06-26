@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,11 +27,12 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { UnidadesComponent } from './unidades/unidades.component';
+import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
   declarations: [
-
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,10 @@ import { UnidadesComponent } from './unidades/unidades.component';
     MatDialogModule,
     MatSelectModule,
     UnidadesComponent,
-    MatPaginatorModule
+    MatPaginatorModule,
+    CommonModule,
+    MatTooltipModule,
+    DashboardComponent
 
   ],
   providers: [],
