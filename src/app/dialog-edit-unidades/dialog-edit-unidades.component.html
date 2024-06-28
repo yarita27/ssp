@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Modificar Unidad</h2>
+
+<mat-dialog-content>
+    
+    <h1 style="font-size: medium;">Sra {{data.name}} Indica los datos de la unidad</h1>
+
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>ID de Unidad</mat-label>
+        <input matInput placeholder="e.g., 26">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
+        <mat-label>Nombre Unidad</mat-label>
+        <input matInput placeholder="Type here...">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
+        <mat-label>Responsable</mat-label>
+        <input matInput placeholder="Type here...">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Correo</mat-label>
+        <input type="email" matInput 
+           placeholder="Ex. pat@example.com">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
+        <mat-label>Contraseña</mat-label>
+        <input type="password" matInput placeholder="Ex. ********">
+    </mat-form-field>
+
+</mat-dialog-content> 
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close mat-dialog-close="true">Cancelar</button>
+    <button mat-button mat-dialog-close mat-dialog-close="false">Modificar</button>
+</mat-dialog-actions>
+

@@ -30,6 +30,9 @@ import { UnidadesComponent } from './unidades/unidades.component';
 import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DialogUnidadesComponent } from './dialog-unidades/dialog-unidades.component';
+import { DialogCriteriosComponent } from './dialog-criterios/dialog-criterios.component';
+import { DialogIndicadoresComponent } from './dialog-indicadores/dialog-indicadores.component';
+import { DialogEditUnidadesComponent } from './dialog-edit-unidades/dialog-edit-unidades.component';
 
 
 @NgModule({
@@ -65,7 +68,10 @@ import { DialogUnidadesComponent } from './dialog-unidades/dialog-unidades.compo
     CommonModule,
     MatTooltipModule,
     DashboardComponent,
-    DialogUnidadesComponent
+    DialogUnidadesComponent,
+    DialogCriteriosComponent,
+    DialogIndicadoresComponent,
+    DialogEditUnidadesComponent
   ],
   providers: [],
 

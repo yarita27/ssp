@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCard } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogUnidadesComponent } from '../dialog-unidades/dialog-unidades.component';
+import { DialogEditUnidadesComponent } from '../dialog-edit-unidades/dialog-edit-unidades.component';
 import { MatButtonModule } from '@angular/material/button';
 
 export interface UnidadData {
@@ -60,11 +61,16 @@ export class UnidadesComponent implements AfterViewInit{
     }
   }
   constructor(public dialog: MatDialog) { }
-  openDialog() {
+  registrarDialog() {
     let dialogRef = this.dialog.open(DialogUnidadesComponent, {data:{name:'Yara'}});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  modificarDialog() {
+    let dialogRef = this.dialog.open(DialogEditUnidadesComponent, {data:{name:'Yara'}});
+
   }
 }
