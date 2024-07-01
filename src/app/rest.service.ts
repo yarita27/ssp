@@ -6,11 +6,11 @@ import { HttpClient } from '@angular/common/http';
 
 })
 export class RestService {
-  get: any;
 
+  
   constructor(private http : HttpClient) { }
 
-  public getIndicadores() {
+  getIndicadores() {
     return this.http.get('http://localhost:3000/indicador');
   }
 }

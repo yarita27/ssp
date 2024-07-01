@@ -9,14 +9,11 @@ import { CriterioComponent } from './criterio/criterio.component';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { RestService } from './rest.service';
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,  
-  providers: [RestService],
+  providers: [],
   imports: [RouterOutlet,
             MatToolbarModule,
             MatIconModule,
@@ -34,13 +31,8 @@ export class AppComponent {
   title = 'ssp';
   showFiller = false;
 
+  constructor(private restService: RestService){}
+
   ngOnInit():void{
-    this.cargarIndicadores();
-  }
-
-  constructor(private RestService : RestService) { }
-
-  public cargarIndicadores(){
-   // this.RestService.getIndicadores().subscribe( (respuesta: any) => {console.log(respuesta)})
   }
 }
