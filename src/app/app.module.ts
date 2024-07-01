@@ -33,12 +33,13 @@ import { DialogUnidadesComponent } from './dialog-unidades/dialog-unidades.compo
 import { DialogCriteriosComponent } from './dialog-criterios/dialog-criterios.component';
 import { DialogIndicadoresComponent } from './dialog-indicadores/dialog-indicadores.component';
 import { DialogEditUnidadesComponent } from './dialog-edit-unidades/dialog-edit-unidades.component';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { RestService } from './rest.service';
 
 
 @NgModule({
   declarations: [
   ],
-
   imports: [
     BrowserModule,
     RouterModule,
@@ -71,9 +72,12 @@ import { DialogEditUnidadesComponent } from './dialog-edit-unidades/dialog-edit-
     DialogUnidadesComponent,
     DialogCriteriosComponent,
     DialogIndicadoresComponent,
-    DialogEditUnidadesComponent
+    DialogEditUnidadesComponent,
+    
   ],
-  providers: [],
+  providers: [
+    RestService,
+  ],
 
 })
 export class AppModule {

@@ -17,6 +17,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogEditUnidadesComponent } from '../dialog-edit-unidades/dialog-edit-unidades.component';
 import { DialogIndicadoresComponent } from '../dialog-indicadores/dialog-indicadores.component';
 import { DialogCriteriosComponent } from '../dialog-criterios/dialog-criterios.component';
+import {HttpClientModule} from '@angular/common/http';
 
 export interface Indicador {
   idCriterio: number;
@@ -56,7 +57,8 @@ const ELEMENT_DATA: Indicador[] = [
     MatPaginator,
     DialogEditUnidadesComponent,
     DialogIndicadoresComponent,
-    DialogCriteriosComponent
+    DialogCriteriosComponent,
+    HttpClientModule
 
   ],
   templateUrl: './indicadores.component.html',
@@ -94,4 +96,5 @@ export class IndicadoresComponent {
     let dialogRef = this.dialog.open(DialogEditUnidadesComponent, {data:{name:'Yara'}});
 
   }
+  
 }

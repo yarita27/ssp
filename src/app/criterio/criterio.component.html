@@ -43,7 +43,7 @@
           <mat-icon [ngClass]="{'activated': element.estado, 'deactivated': !element.estado}">
             {{element.estado ? 'check_circle' : 'cancel'}}
           </mat-icon>
-          <span>{{element.estado ? 'Activado' : 'Desactivado'}}</span>
+          <span>{{element.estado ? '' : ''}}</span>
         </td>
       </ng-container>
 
