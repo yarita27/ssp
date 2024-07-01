@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -12,6 +12,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogEditUnidadesComponent } from '../dialog-edit-unidades/dialog-edit-unidades.component';
 import { MatButtonModule } from '@angular/material/button';
 import {DialogCriteriosComponent} from '../dialog-criterios/dialog-criterios.component';
+import { RestService } from '../rest.service';
 
 export interface Criterio {
   id: number;
@@ -20,17 +21,13 @@ export interface Criterio {
   estado: boolean;
 }
 
-const ELEMENT_DATA: Criterio[] = [
-  {id: 1, nombre: 'Infraestructura', descripcion: 'Cell Data', estado: true},
-  {id: 2, nombre: 'Energía', descripcion: 'Cell Data', estado: false},
-  {id: 3, nombre: 'Desperdicio', descripcion: 'Cell Data', estado: true},
-  {id: 4, nombre: 'Agua', descripcion: 'Cell Data', estado: false}
-];
+
 
 @Component({
   selector: 'app-criterio',
   templateUrl: './criterio.component.html',
   styleUrls: ['./criterio.component.css'],
+  standalone: true,
   imports: [CommonModule,
             MatIconModule,
             MatCardModule,
@@ -38,6 +35,7 @@ const ELEMENT_DATA: Criterio[] = [
             MatGridListModule,
             MatInputModule,
             MatTableModule,
+
             MatPaginatorModule,
             MatDialogModule,
             MatButtonModule,
@@ -45,12 +43,42 @@ const ELEMENT_DATA: Criterio[] = [
             MatCard,
             DialogEditUnidadesComponent,
             DialogCriteriosComponent
-  ],
-  standalone: true
+  ]
+  
 })
-export class CriterioComponent implements AfterViewInit{
+export class CriterioComponent implements AfterViewInit, OnInit{
+  public ELEMENT_DATA: Criterio[] = [
+    {id: 1, nombre: 'Infraestructura', descripcion: 'Cell Data', estado: true},
+    {id: 2, nombre: 'Energía', descripcion: 'Cell Data', estado: false},
+    {id: 3, nombre: 'Desperdicio', descripcion: 'Cell Data', estado: true},
+    {id: 4, nombre: 'Agua', descripcion: 'Cell Data', estado: false}
+  ];
+  listaCriterios : Criterio[] = [];
+
+  constructor(
+    public dialog: MatDialog,
+    private restService: RestService
+  ) {}
+
+  ngOnInit(): void {
+    this.cargarCriterios();
+  }
+
+  cargarCriterios(){
+    this.restService.getCriterios().subscribe({
+      next: (result : any) => {
+        this.listaCriterios = result;
+        console.log("Criterios");
+        console.log(this.listaCriterios);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
   displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'estado', 'accion'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -65,8 +93,6 @@ export class CriterioComponent implements AfterViewInit{
       this.dataSource.paginator.firstPage();
     }
   }
-  
-  constructor(public dialog: MatDialog) { }
 
   registrarDialog() {
     let dialogRef = this.dialog.open(DialogCriteriosComponent, {data:{name:'Yara'}});

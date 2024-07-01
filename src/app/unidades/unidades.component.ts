@@ -10,6 +10,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogUnidadesComponent } from '../dialog-unidades/dialog-unidades.component';
 import { DialogEditUnidadesComponent } from '../dialog-edit-unidades/dialog-edit-unidades.component';
 import { MatButtonModule } from '@angular/material/button';
+import { RestService } from '../rest.service';
 
 export interface UnidadData {
   id: number;
@@ -60,7 +61,11 @@ export class UnidadesComponent implements AfterViewInit{
       this.dataSource.paginator.firstPage();
     }
   }
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    private restService: RestService
+  ) {}
+  
   registrarDialog() {
     let dialogRef = this.dialog.open(DialogUnidadesComponent, {data:{name:'Yara'}});
 

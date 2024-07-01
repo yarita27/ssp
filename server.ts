@@ -1,6 +1,7 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
 import express from 'express';
+import cors from 'cors';  // Importa cors
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import bootstrap from './src/main.server';
@@ -16,6 +17,13 @@ export function app(): express.Express {
 
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
+
+  // Habilita CORS
+  server.use(cors({
+    origin: 'http://localhost:4200',  // Permite el origen de tu aplicación Angular
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Métodos permitidos
+    allowedHeaders: ['Content-Type', 'Authorization']  // Headers permitidos
+  }));
 
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });

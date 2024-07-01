@@ -22,7 +22,7 @@ import { RestService } from './rest.service';
             MatListModule,
             RouterModule,
             MatCardModule,
-
+        
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -30,9 +30,4 @@ import { RestService } from './rest.service';
 export class AppComponent {
   title = 'ssp';
   showFiller = false;
-
-  constructor(private restService: RestService){}
-
-  ngOnInit():void{
-  }
 }

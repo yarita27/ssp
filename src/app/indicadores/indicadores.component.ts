@@ -17,7 +17,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogEditUnidadesComponent } from '../dialog-edit-unidades/dialog-edit-unidades.component';
 import { DialogIndicadoresComponent } from '../dialog-indicadores/dialog-indicadores.component';
 import { DialogCriteriosComponent } from '../dialog-criterios/dialog-criterios.component';
-import {HttpClientModule} from '@angular/common/http';
+import { RestService } from '../rest.service';
 
 export interface Indicador {
   idCriterio: number;
@@ -57,8 +57,7 @@ const ELEMENT_DATA: Indicador[] = [
     MatPaginator,
     DialogEditUnidadesComponent,
     DialogIndicadoresComponent,
-    DialogCriteriosComponent,
-    HttpClientModule
+    DialogCriteriosComponent
 
   ],
   templateUrl: './indicadores.component.html',
@@ -82,7 +81,10 @@ export class IndicadoresComponent {
     }
   }
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    private restService: RestService
+  ) {}
 
   registrarDialog() {
     let dialogRef = this.dialog.open(DialogIndicadoresComponent, {data:{name:'Yara'}});
