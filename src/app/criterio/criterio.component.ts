@@ -69,14 +69,12 @@ export class CriterioComponent implements AfterViewInit, OnInit{
     this.restService.getCriterios().subscribe({
       next: (result : any) => {
         this.listaCriterios = result;
-        console.log("Criterios");
-        console.log(this.listaCriterios);
+        this.dataSource = new MatTableDataSource(this.listaCriterios);
       },
       error: (err) => {
         console.error(err);
       }
     });
-    this.dataSource = new MatTableDataSource(this.listaCriterios);
   }
 
   

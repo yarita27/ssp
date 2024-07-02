@@ -68,14 +68,12 @@ export class IndicadoresComponent {
     this.restService.getIndicadores().subscribe({
       next: (result : any) => {
         this.listaIndicadores = result;
-        console.log("Indicadores");
-        console.log(this.listaIndicadores);
+        this.dataSource = new MatTableDataSource(this.listaIndicadores);
       },
       error: (err) => {
         console.error(err);
       }
     });
-    this.dataSource = new MatTableDataSource(this.listaIndicadores);
   }
 
   displayedColumns: string[] = ['id_criterio', 'id', 'nombre', 'descripcion', 'doc_respuesta', 'estado', 'accion'];

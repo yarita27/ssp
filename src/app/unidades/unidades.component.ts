@@ -60,12 +60,10 @@ export class UnidadesComponent implements AfterViewInit, OnInit{
   cargarUnidades(){
     this.restService.getUnidades().subscribe({
       next: (result : Unidad[]) => {
-        console.log(result);
         this.listaUnidades = result;
-        console.log(this.listaUnidades);
+        this.dataSource = new MatTableDataSource(this.listaUnidades);
       }
     });
-    this.dataSource = new MatTableDataSource(this.listaUnidades);
   }
 
   

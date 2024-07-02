@@ -1,9 +1,9 @@
-import { Component , Inject} from '@angular/core';
+import { Component , Inject, } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import {  MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatLabel } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelect } from '@angular/material/select';
 import { MatOption, MatOptionModule } from '@angular/material/core';
@@ -26,12 +26,17 @@ interface Estado {
     MatInputModule,
     MatSelect,
     MatOptionModule,
-    MatOption
+    MatOption,
+    ReactiveFormsModule,
   ],
   templateUrl: './dialog-criterios.component.html',
   styleUrl: './dialog-criterios.component.css'
 })
 export class DialogCriteriosComponent {
+  isChecked = true;
+  onSubmit() {
+    throw new Error('Method not implemented.');
+  }
 
   estados: Estado[] = [
     {value: false, viewValue: 'Desactivado'},
@@ -41,6 +46,18 @@ export class DialogCriteriosComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any){
 
   }
+  
+  json = JSON.stringify(this.data);
+
+  
+
+  agregarCriterio() : void{
+    console.log('Criterio agregado');
+  }
+  guardarCriterio(value: any) : void{
+      console.log(value);
+    }
+
   onInit(){
 
   }
