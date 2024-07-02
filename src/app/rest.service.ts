@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Criterio } from './criterio/criterio.component';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +22,13 @@ export class RestService {
 
   //CRITERIO
   //Obtener todos los criterios
-  getCriterios() : Observable <any>{
-    return this.http.get<any>(this.urlApi + '/criterio').pipe(res=>res);
+  getCriterios() : Observable <Criterio[]>{
+    return this.http.get<Criterio[]>(this.urlApi + '/criterio').pipe(res=>res);
   }
 
+  postCriterio(criterio : Criterio) : Observable <Criterio>{
+    return this.http.post<Criterio>(this.urlApi + '/criterio', criterio).pipe(res=>res);
+  }
 
 
 
