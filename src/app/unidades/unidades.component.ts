@@ -1,9 +1,9 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule} from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatCard } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -11,21 +11,18 @@ import { DialogUnidadesComponent } from '../dialog-unidades/dialog-unidades.comp
 import { DialogEditUnidadesComponent } from '../dialog-edit-unidades/dialog-edit-unidades.component';
 import { MatButtonModule } from '@angular/material/button';
 import { RestService } from '../rest.service';
+import { MatTooltip } from '@angular/material/tooltip';
+import { NgClass } from '@angular/common';
 
-export interface UnidadData {
+export interface Unidad {
   id: number;
   nombre: string;
   responsable: string;
   correo: string;
-  contrasenia: string;
-}
+  contrasena: string;
+  estado: boolean;
+} 
 
-const ELEMENT_DATA: UnidadData[] = [
-  {id: 1, nombre: 'Emmanu', responsable: 'Sustentabilidad', correo: 'admin@gmail.com', contrasenia: 'dpto' },
-  {id: 2, nombre: 'Franklin', responsable: 'Informatica', correo: 'admin@gmail.com', contrasenia: 'dpto'},
-  {id: 3, nombre: 'Henrri', responsable: 'Sustentabilidad', correo: 'admin@gmail.com', contrasenia: 'dpto'},
-  // add more data if needed
-];
 
 @Component({
   selector: 'app-unidades',
@@ -41,12 +38,41 @@ const ELEMENT_DATA: UnidadData[] = [
     MatTableModule, 
     MatPaginatorModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTooltip,
+    NgClass
   ]
 })
-export class UnidadesComponent implements AfterViewInit{
-  displayedColumns: string[] = ['id', 'nombre', 'responsable', 'correo', 'contrasenia', 'accion'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+export class UnidadesComponent implements AfterViewInit, OnInit{
+
+  constructor(
+    public dialog: MatDialog,
+    private restService: RestService
+  ) {}
+  
+  listaUnidades : Unidad[] = [];
+
+  ngOnInit(): void {
+    this.cargarUnidades();
+  }
+
+
+  cargarUnidades(){
+    this.restService.getUnidades().subscribe({
+      next: (result : Unidad[]) => {
+        console.log(result);
+        this.listaUnidades = result;
+        console.log(this.listaUnidades);
+      }
+    });
+    this.dataSource = new MatTableDataSource(this.listaUnidades);
+  }
+
+  
+
+
+  displayedColumns: string[] = ['id', 'nombre', 'responsable', 'correo', 'contrasena', 'estado', 'accion'];
+  dataSource = new MatTableDataSource(this.listaUnidades);
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -61,10 +87,6 @@ export class UnidadesComponent implements AfterViewInit{
       this.dataSource.paginator.firstPage();
     }
   }
-  constructor(
-    public dialog: MatDialog,
-    private restService: RestService
-  ) {}
   
   registrarDialog() {
     let dialogRef = this.dialog.open(DialogUnidadesComponent, {data:{name:'Yara'}});
@@ -78,4 +100,5 @@ export class UnidadesComponent implements AfterViewInit{
     let dialogRef = this.dialog.open(DialogEditUnidadesComponent, {data:{name:'Yara'}});
 
   }
+
 }

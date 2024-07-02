@@ -6,6 +6,7 @@
 
   <mat-card style="width: 100%; padding: 20px; display: flex; justify-content: space-between; margin-top: 20px;">
     
+
     <mat-form-field >
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
@@ -43,9 +44,20 @@
       </ng-container>
 
       <!-- Contrasenia Column -->
-      <ng-container matColumnDef="contrasenia">
+      <ng-container matColumnDef="contrasena">
         <th mat-header-cell *matHeaderCellDef> Contraseña </th>
-        <td mat-cell *matCellDef="let element"> {{element.contrasenia}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.contrasena}} </td>
+      </ng-container>
+
+      <!-- Estado Column -->
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon [ngClass]="{'activated': element.estado, 'deactivated': !element.estado}" matTooltip="{{element.estado ? 'check_circle' : 'cancel'}}">
+            {{element.estado ? 'check_circle' : 'cancel'}}
+          </mat-icon>
+          <span>{{element.estado ? '' : ''}}</span>
+        </td>
       </ng-container>
 
       <!-- Accion Column -->

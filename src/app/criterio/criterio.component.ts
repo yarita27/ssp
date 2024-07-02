@@ -53,17 +53,18 @@ export class CriterioComponent implements AfterViewInit, OnInit{
     {id: 3, nombre: 'Desperdicio', descripcion: 'Cell Data', estado: true},
     {id: 4, nombre: 'Agua', descripcion: 'Cell Data', estado: false}
   ];
-  listaCriterios : Criterio[] = [];
 
   constructor(
     public dialog: MatDialog,
     private restService: RestService
   ) {}
 
+  listaCriterios : Criterio[] = [];
+  
   ngOnInit(): void {
     this.cargarCriterios();
   }
-
+  
   cargarCriterios(){
     this.restService.getCriterios().subscribe({
       next: (result : any) => {
@@ -75,10 +76,12 @@ export class CriterioComponent implements AfterViewInit, OnInit{
         console.error(err);
       }
     });
+    this.dataSource = new MatTableDataSource(this.listaCriterios);
   }
 
+  
   displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'estado', 'accion'];
-  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  dataSource = new MatTableDataSource(this.listaCriterios);
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;

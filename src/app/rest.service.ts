@@ -8,12 +8,51 @@ import { Observable } from 'rxjs';
 })
 export class RestService {
 
-  private urlApi : string = 'http://localhost:3000/criterio';
+  private urlApi : string = 'http://localhost:3000';
   constructor(private http : HttpClient) { }
 
-
-  getCriterios() : Observable <any>{
-    //return this.http.get<any>(this.urlApi + '/indicador');
-    return this.http.get<any>(this.urlApi).pipe(res=>res);
+  //ADMINISTRADOR
+  //Obtener todos los administradores
+  getAdministradores() : Observable <any>{
+    return this.http.get<any>(this.urlApi + '/admin').pipe(res=>res);
   }
+
+
+
+  //CRITERIO
+  //Obtener todos los criterios
+  getCriterios() : Observable <any>{
+    return this.http.get<any>(this.urlApi + '/criterio').pipe(res=>res);
+  }
+
+
+
+
+  //INDICADOR
+  //Obtener todos los indicadores
+  getIndicadores() : Observable <any>{
+    return this.http.get<any>(this.urlApi + '/indicador').pipe(res=>res);
+  }
+
+
+
+
+  //UNIDAD
+  //Obtener todas las unidades
+  getUnidades() : Observable <any>{
+    return this.http.get<any>(this.urlApi + '/unidad').pipe(res=>res);
+  }
+
+
+
+
+
+  //ASIGNACION
+  //Obtener todas las asignaciones  
+  getAsignaciones() : Observable <any>{
+    return this.http.get<any>(this.urlApi + '/asignacion').pipe(res=>res);
+  }
+
+
+
 }

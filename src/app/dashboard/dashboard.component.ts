@@ -67,8 +67,6 @@ export class DashboardComponent implements AfterViewInit, OnInit{
     });
   }
 
-  
-
   displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'estado'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 

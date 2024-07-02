@@ -20,20 +20,14 @@ import { DialogCriteriosComponent } from '../dialog-criterios/dialog-criterios.c
 import { RestService } from '../rest.service';
 
 export interface Indicador {
-  idCriterio: number;
-  idIndicador: number;
+  id_criterio: number;
+  id: number;
   nombre: string;
   descripcion: string;
-  archivoAdjunto?: string;
+  doc_pregunta: string;
   estado: boolean;
 }
 
-const ELEMENT_DATA: Indicador[] = [
-  {idCriterio: 1, idIndicador: 101, nombre: 'Infraestructura', descripcion: 'Cell Data', archivoAdjunto: 'file1.pdf', estado: true},
-  {idCriterio: 2, idIndicador: 102, nombre: 'Energía', descripcion: 'Cell Data', archivoAdjunto: 'file2.pdf', estado: false},
-  {idCriterio: 3, idIndicador: 103, nombre: 'Desperdicio', descripcion: 'Cell Data', archivoAdjunto: 'file3.pdf', estado: true},
-  {idCriterio: 4, idIndicador: 104, nombre: 'Agua', descripcion: 'Cell Data', archivoAdjunto: 'file4.pdf', estado: false}
-];
 
 @Component({
   selector: 'app-indicadores',
@@ -64,8 +58,28 @@ const ELEMENT_DATA: Indicador[] = [
   styleUrls: ['./indicadores.component.css']
 })
 export class IndicadoresComponent {
-  displayedColumns: string[] = ['idCriterio', 'idIndicador', 'nombre', 'descripcion', 'archivoAdjunto', 'estado', 'accion'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  listaIndicadores: Indicador[] = [];
+
+  ngOnInit(): void {
+    this.cargarIndicadores();
+  }
+  
+  cargarIndicadores(){
+    this.restService.getIndicadores().subscribe({
+      next: (result : any) => {
+        this.listaIndicadores = result;
+        console.log("Indicadores");
+        console.log(this.listaIndicadores);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+    this.dataSource = new MatTableDataSource(this.listaIndicadores);
+  }
+
+  displayedColumns: string[] = ['id_criterio', 'id', 'nombre', 'descripcion', 'doc_respuesta', 'estado', 'accion'];
+  dataSource = new MatTableDataSource(this.listaIndicadores);
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
