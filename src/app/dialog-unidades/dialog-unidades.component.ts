@@ -14,7 +14,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 
-
+export class FormFieldPrefixSuffixExample {
+  hide = true;
+}
 @Component({
   selector: 'app-dialog-unidades',
   standalone: true,
@@ -25,13 +27,15 @@ import { MatCardModule } from '@angular/material/card';
     MatLabel,
     MatButtonModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
 
   ],
   templateUrl: './dialog-unidades.component.html',
   styleUrl: './dialog-unidades.component.css'
 })
 export class DialogUnidadesComponent {
+hide: any;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any){
 
@@ -39,4 +43,5 @@ export class DialogUnidadesComponent {
   onInit(){
 
   }
+ 
 }

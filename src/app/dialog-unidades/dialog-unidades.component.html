@@ -24,11 +24,14 @@
         <input type="email" matInput 
            placeholder="Ex. pat@example.com">
     </mat-form-field>
-
+    
     <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
         <mat-label>Contraseña</mat-label>
-        <input type="password" matInput placeholder="Ex. ********">
+        <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </mat-form-field>
+
+
 
 </mat-dialog-content> 
 <mat-dialog-actions>
