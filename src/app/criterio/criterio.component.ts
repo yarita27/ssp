@@ -15,10 +15,10 @@ import {DialogCriteriosComponent} from '../dialog-criterios/dialog-criterios.com
 import { RestService } from '../rest.service';
 
 export interface Criterio {
-  id: number;
-  nombre: string;
-  descripcion: string;
-  estado: boolean;
+  "id": number;
+  "nombre": string;
+  "descripcion": string;
+  "estado": boolean;
 }
 
 
@@ -47,13 +47,6 @@ export interface Criterio {
   
 })
 export class CriterioComponent implements AfterViewInit, OnInit{
-  public ELEMENT_DATA: Criterio[] = [
-    {id: 1, nombre: 'Infraestructura', descripcion: 'Cell Data', estado: true},
-    {id: 2, nombre: 'Energía', descripcion: 'Cell Data', estado: false},
-    {id: 3, nombre: 'Desperdicio', descripcion: 'Cell Data', estado: true},
-    {id: 4, nombre: 'Agua', descripcion: 'Cell Data', estado: false}
-  ];
-
   constructor(
     public dialog: MatDialog,
     private restService: RestService
@@ -77,6 +70,20 @@ export class CriterioComponent implements AfterViewInit, OnInit{
     });
   }
 
+
+  eliminarCriterio(value : any) : void{ 
+    this.restService.deleteCriterio(value).subscribe(
+      (result) => {
+        console.log(result);
+      }
+    );
+  }
+
+  eliminarPrevio(value : any) : void{
+    //Aqui va el proceso previo a la eliminacion donde se toma los datos directo desde la tabla
+    //y se envia el id del criterio a eliminar , value es el objeto completo que tiene la 
+    //informacion del criterio en la fila seleccionada
+  };
   
   displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'estado', 'accion'];
   dataSource = new MatTableDataSource(this.listaCriterios);

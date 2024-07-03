@@ -7,6 +7,9 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelect } from '@angular/material/select';
 import { MatOption, MatOptionModule } from '@angular/material/core';
+import { Criterio } from '../criterio/criterio.component';
+import { RestService } from '../rest.service';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 interface Estado {
   value: boolean;
@@ -28,6 +31,7 @@ interface Estado {
     MatOptionModule,
     MatOption,
     ReactiveFormsModule,
+    MatSlideToggleModule
   ],
   templateUrl: './dialog-criterios.component.html',
   styleUrl: './dialog-criterios.component.css'
@@ -43,22 +47,35 @@ export class DialogCriteriosComponent {
     {value: true, viewValue: 'Activado'},
   ];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any){
 
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private restService: RestService){
   }
-  
-  json = JSON.stringify(this.data);
 
-  
+  registrarCriterio(value : Criterio) : void{
+    this.restService.postCriterio(value).subscribe(
+      (result) => {
+        console.log(result);
+      }
+    );
+  };
 
-  agregarCriterio() : void{
-    console.log('Criterio agregado');
+
+
+  registrarPrevio(value: any) : void{
+    console.log(value);
+    this.registrarCriterio(value);
+    console.log("Guardando criterio...");
+    /*let buffer: Criterio = {id: 0, nombre: '', descripcion: '', estado: false};
+    buffer.id = value.id;
+    buffer.nombre = value.nombre;
+    buffer.descripcion = value.descripcion;
+    buffer.estado = value.estado;
+    console.log(buffer);*/
   }
-  guardarCriterio(value: any) : void{
-      console.log(value);
-    }
 
   onInit(){
-
   }
+
 }

@@ -1,5 +1,8 @@
 {
     "github.copilot.preferredAccount": "yarita27",
     "material-icon-theme.activeIconPack": "nest",
-    "editor.linkedEditing": true
+    "editor.linkedEditing": true,
+    "cSpell.words": [
+        "Criterio"
+    ]
 }

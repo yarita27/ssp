@@ -26,11 +26,13 @@ export class RestService {
     return this.http.get<Criterio[]>(this.urlApi + '/criterio').pipe(res=>res);
   }
 
-  postCriterio(criterio : Criterio) : Observable <Criterio>{
+  postCriterio(criterio : Criterio) : Observable <any>{
     return this.http.post<Criterio>(this.urlApi + '/criterio', criterio).pipe(res=>res);
   }
 
-
+  deleteCriterio( id : number) : Observable <any>{
+    return this.http.delete<any>(this.urlApi + '/criterio').pipe(res=>res);
+  }
 
   //INDICADOR
   //Obtener todos los indicadores
