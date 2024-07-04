@@ -1,4 +1,4 @@
-import { Component , Inject, } from '@angular/core';
+import { Component , Inject, model, } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import {  MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatLabel } from '@angular/material/form-field';
@@ -10,6 +10,7 @@ import { MatOption, MatOptionModule } from '@angular/material/core';
 import { Criterio } from '../criterio/criterio.component';
 import { RestService } from '../rest.service';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 interface Estado {
   value: boolean;
@@ -31,12 +32,14 @@ interface Estado {
     MatOptionModule,
     MatOption,
     ReactiveFormsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatCheckboxModule
   ],
   templateUrl: './dialog-criterios.component.html',
   styleUrl: './dialog-criterios.component.css'
 })
 export class DialogCriteriosComponent {
+  readonly checked = model(false);
   isChecked = true;
   onSubmit() {
     throw new Error('Method not implemented.');

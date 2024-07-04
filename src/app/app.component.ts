@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , Inject} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -30,4 +30,5 @@ import { RestService } from './rest.service';
 export class AppComponent {
   title = 'ssp';
   showFiller = false;
+  pageTitle!: String;
 }

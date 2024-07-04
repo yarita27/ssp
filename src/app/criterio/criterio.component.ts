@@ -13,6 +13,7 @@ import { DialogEditUnidadesComponent } from '../dialog-edit-unidades/dialog-edit
 import { MatButtonModule } from '@angular/material/button';
 import {DialogCriteriosComponent} from '../dialog-criterios/dialog-criterios.component';
 import { RestService } from '../rest.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 export interface Criterio {
   "id": number;
@@ -35,7 +36,7 @@ export interface Criterio {
             MatGridListModule,
             MatInputModule,
             MatTableModule,
-
+            MatCheckboxModule,
             MatPaginatorModule,
             MatDialogModule,
             MatButtonModule,

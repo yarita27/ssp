@@ -1,110 +1,20 @@
-<p>matriz-asignacion works!</p>
-<div class="assignment-matrix-container">
-    <header>
-      <h1>Matriz de Asignación de Involucrados por Indicadores</h1> <!-- Esta estatico, hasta conectar API con front -->
-    </header>
-    <main>
-      <table class="assignment-table">
-        <thead>
-          <tr>
-            <th>Unidad / Indicador</th>
-            <th>1.1 Infraestructura</th>
-            <th>1.2 Áreas Verdes</th>
-            <th>2.1 3R Reciclaje</th>
-            <th>2.2 Desechos Orgánicos</th>
-            <th>5.1 Autos Utilizados en Universidad</th>
-            <th>5.2 Motos que Entran Diario</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Informática</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-          </tr>
-          <tr>
-            <td>Civil</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-          </tr>
-          <tr>
-            <td>Servicios Generales</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-          </tr>
-          <tr>
-            <td>Sustentabilidad</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-          </tr>
-          <tr>
-            <td>Cultura</td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-          </tr>
-        </tbody>
-      </table>
-      <button>Aceptar</button>
-      <div class="assignments-list">
-        <h2>Asignaciones</h2>
-        <ul>
-          <li>
-            <strong>Informática:</strong>
-            <ul>
-              <li>1.1 Infraestructura</li>
-              <li>2.1 3R Reciclaje</li>
-              <li>5.1 Autos Utilizados en Universidad</li>
-            </ul>
-          </li>
-          <li>
-            <strong>Civil:</strong>
-            <ul>
-              <li>1.2 Áreas Verdes</li>
-              <li>2.2 Desechos Orgánicos</li>
-            </ul>
-          </li>
-          <li>
-            <strong>Servicios Generales:</strong>
-            <ul>
-              <li>5.2 Motos que Entran Diario</li>
-            </ul>
-          </li>
-          <li>
-            <strong>Sustentabilidad:</strong>
-            <ul>
-              <li>2.1 3R Reciclaje</li>
-              <li>2.2 Desechos Orgánicos</li>
-            </ul>
-          </li>
-          <li>
-            <strong>Cultura:</strong>
-            <ul>
-              <li>1.1 Infraestructura</li>
-              <li>5.1 Autos Utilizados en Universidad</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </main>
+<!-- src/app/matriz-dinamica/matriz-dinamica.component.html -->
+<div class="matriz-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Unidades / Indicadores</th>
+          <th *ngFor="let indicador of indicadores">{{ indicador.nombre }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let unidad of unidades; let i = index">
+          <td>{{ unidad.nombre }}</td>
+          <td *ngFor="let indicador of indicadores; let j = index">
+            <input type="text" [(ngModel)]="matriz[i][j]" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   

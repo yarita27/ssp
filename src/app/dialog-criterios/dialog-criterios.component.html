@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>Registro de Criterios</h2>
-<form #formCriterio = "ngForm"  (ngSubmit)="registrarPrevio(formCriterio.value)" class="gestionCriterio">   
+<form #formCriterio = "ngForm"  (ngSubmit)="registrarPrevio(formCriterio.value)" class="gestionCriterio">  
     <mat-dialog-content>
         <h1 style="font-size: medium;">Sra {{data.name}} Indica los datos del Criterio</h1>
 
@@ -17,6 +17,9 @@
             <mat-label>Descripcion</mat-label>
             <textarea matInput placeholder="Type here..." name="descripcion" ngModel></textarea> 
         </mat-form-field>
+
+
+
         <!--
             <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
                 <mat-label>Estado</mat-label>
