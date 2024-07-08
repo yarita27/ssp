@@ -42,7 +42,7 @@ export class DialogCriteriosComponent {
   readonly checked = model(false);
   isChecked = true;
   onSubmit() {
-    throw new Error('Method not implemented.');
+    console.log('submit');
   }
 
   estados: Estado[] = [
@@ -70,12 +70,6 @@ export class DialogCriteriosComponent {
     console.log(value);
     this.registrarCriterio(value);
     console.log("Guardando criterio...");
-    /*let buffer: Criterio = {id: 0, nombre: '', descripcion: '', estado: false};
-    buffer.id = value.id;
-    buffer.nombre = value.nombre;
-    buffer.descripcion = value.descripcion;
-    buffer.estado = value.estado;
-    console.log(buffer);*/
   }
 
   onInit(){

@@ -1,38 +1,48 @@
-<h2 mat-dialog-title>Modificar Unidad</h2>
-
+<h2 mat-dialog-title>Registro de Unidades</h2>(ngSubmit)="registrarPrevio(formUnidad.value)"
+<form #formUnidad = "ngForm"  class="gestionUnidad">  
 <mat-dialog-content>
     
     <h1 style="font-size: medium;">Sra {{data.name}} Indica los datos de la unidad</h1>
 
     <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>ID de Unidad</mat-label>
-        <input matInput placeholder="e.g., 26">
+        <input matInput placeholder="e.g., 26" type="number" name="id" ngModel>
     </mat-form-field>
 
     <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
         <mat-label>Nombre Unidad</mat-label>
-        <input matInput placeholder="Type here...">
+        <input matInput placeholder="Type here..." name="nombre" ngModel>
     </mat-form-field>
 
     <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
         <mat-label>Responsable</mat-label>
-        <input matInput placeholder="Type here...">
+        <input matInput placeholder="Type here..." name="responsable" ngModel>
     </mat-form-field>
 
     <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>Correo</mat-label>
-        <input type="email" matInput 
-           placeholder="Ex. pat@example.com">
+        <input type="email" matInput placeholder="Ex. pat@example.com" name="correo" ngModel>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
+        <mat-label>Contraseña</mat-label>
+        <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" name="contrasena" ngModel>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
     </mat-form-field>
 
     <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
-        <mat-label>Contraseña</mat-label>
-        <input type="password" matInput placeholder="Ex. ********">
+        <mat-label>Estado Criterio</mat-label>
+        <mat-select type="boolean" name="estado" ngModel>
+            @for (estado of estados; track estado) {
+              <mat-option [value]="estado.value">{{estado.viewValue}}</mat-option>
+            }
+        </mat-select>
     </mat-form-field>
 
 </mat-dialog-content> 
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close mat-dialog-close="true">Cancelar</button>
-    <button mat-button mat-dialog-close mat-dialog-close="false">Modificar</button>
+    <button mat-button type="reset" mat-dialog-close mat-dialog-close="false">Cancelar</button>
+    <button mat-button type="submit" mat-dialog-close mat-dialog-close="true">Registrar</button>
 </mat-dialog-actions>
 
+</form>

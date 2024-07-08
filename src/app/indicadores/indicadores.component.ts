@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -57,7 +57,7 @@ export interface Indicador {
   templateUrl: './indicadores.component.html',
   styleUrls: ['./indicadores.component.css']
 })
-export class IndicadoresComponent {
+export class IndicadoresComponent implements AfterViewInit, OnInit{
   listaIndicadores: Indicador[] = [];
 
   ngOnInit(): void {
@@ -84,7 +84,8 @@ export class IndicadoresComponent {
 
   ngAfterViewInit() {
       this.dataSource.paginator = this.paginator;
-    }
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

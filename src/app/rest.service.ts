@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Criterio } from './criterio/criterio.component';
+import { Indicador } from './indicadores/indicadores.component';
+import { Unidad } from './unidades/unidades.component';
 
 @Injectable({
   providedIn: 'root'
@@ -26,20 +28,30 @@ export class RestService {
     return this.http.get<Criterio[]>(this.urlApi + '/criterio').pipe(res=>res);
   }
 
+  getCriteriosActivos() : Observable <Criterio[]>{
+    return this.http.get<Criterio[]>(this.urlApi + '/criterio/activos').pipe(res=>res);
+  }
+
   postCriterio(criterio : Criterio) : Observable <any>{
     return this.http.post<Criterio>(this.urlApi + '/criterio', criterio).pipe(res=>res);
   }
 
   deleteCriterio( id : number) : Observable <any>{
-    return this.http.delete<any>(this.urlApi + '/criterio').pipe(res=>res);
+    return this.http.delete<Criterio>(this.urlApi + '/criterio').pipe(res=>res);
   }
 
   //INDICADOR
   //Obtener todos los indicadores
-  getIndicadores() : Observable <any>{
-    return this.http.get<any>(this.urlApi + '/indicador').pipe(res=>res);
+  getIndicadores() : Observable <Indicador[]>{
+    return this.http.get<Indicador[]>(this.urlApi + '/indicador').pipe(res=>res);
   }
 
+  getIndicadoresActivos() : Observable <Indicador[]>{
+    return this.http.get<Indicador[]>(this.urlApi + '/indicador/activos').pipe(res=>res);
+  }
+  postIndicador(indicador : Indicador) : Observable <any>{
+    return this.http.post<Indicador>(this.urlApi + '/indicador', indicador).pipe(res=>res);
+  }
 
 
 
@@ -49,6 +61,9 @@ export class RestService {
     return this.http.get<any>(this.urlApi + '/unidad').pipe(res=>res);
   }
 
+  postUnidad(unidad : Unidad) : Observable <any>{
+    return this.http.post<Unidad>(this.urlApi + '/unidad', unidad).pipe(res=>res);
+  }
 
 
 

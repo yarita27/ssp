@@ -1,4 +1,4 @@
-import { Component , Inject} from '@angular/core';
+import { Component , Inject, OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatLabel } from '@angular/material/form-field';
@@ -13,6 +13,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
+import { Indicador } from '../indicadores/indicadores.component';
+import { Criterio } from '../criterio/criterio.component';
+import { RestService } from '../rest.service';
+import { Unidad } from '../unidades/unidades.component';
 
 export class FormFieldPrefixSuffixExample {
   hide = true;
@@ -34,14 +38,58 @@ export class FormFieldPrefixSuffixExample {
   templateUrl: './dialog-unidades.component.html',
   styleUrl: './dialog-unidades.component.css'
 })
-export class DialogUnidadesComponent {
-hide: any;
+export class DialogUnidadesComponent implements OnInit{
+  hide: any;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any){
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private restService: RestService
+  ){
+
+  }
+  ngOnInit(): void {
 
   }
   onInit(){
 
   }
+
+  registrarUnidad(value : Unidad) : void{
+    this.restService.postUnidad(value).subscribe(
+      (result) => {
+        console.log(result);
+      }
+    );
+  };
+
+  registrarPrevio(value: any) : void{
+    console.log(value);
+    this.registrarUnidad(value);
+    console.log("Guardando Unidad...");
+  }
  
+  /*
+  cargarCriteriosActivos() : void{
+    this.restService.getCriteriosActivos().subscribe({
+      next: (result : any) => {
+        this.criteriosActivos = result;
+      },
+      error : (err) => {
+        console.error(err);
+      }
+    });
+  }
+
+  cargarIndicadoresActivos() : void{
+    this.restService.getIndicadoresActivos().subscribe({
+      next: (result : any) => {
+        this.indicadoresActivos = result;
+      },
+      error : (err) => {
+        console.error(err);
+      }
+    });
+  }
+*/
 }
