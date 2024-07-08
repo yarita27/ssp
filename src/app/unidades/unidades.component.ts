@@ -94,9 +94,31 @@ export class UnidadesComponent implements AfterViewInit, OnInit{
     });
   }
 
-  modificarDialog() {
-    let dialogRef = this.dialog.open(DialogEditUnidadesComponent, {data:{name:'Yara'}});
+  modificarDialog(unidad : Unidad) {
+    let dialogRef = this.dialog.open(DialogEditUnidadesComponent, {data:{unidad:unidad}});
+    console.log(unidad);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
+  eliminarPrevio(value : any) : void{
+    console.log(value);
+    this.eliminarUnidad(value.id);
+    console.log("Eliminando Unidad...");
+  }
+
+  eliminarUnidad(id: number){
+    
+    this.restService.deleteUnidad(id).subscribe({
+      next: (result) => {
+        console.log(result);
+        this.cargarUnidades();
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
   }
 
 }

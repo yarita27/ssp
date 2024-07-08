@@ -61,11 +61,21 @@ export class RestService {
     return this.http.get<any>(this.urlApi + '/unidad').pipe(res=>res);
   }
 
+  getUnidadesActivas() : Observable <Unidad[]>{
+    return this.http.get<Unidad[]>(this.urlApi + '/unidad/activos').pipe(res=>res);
+  }
+
   postUnidad(unidad : Unidad) : Observable <any>{
     return this.http.post<Unidad>(this.urlApi + '/unidad', unidad).pipe(res=>res);
   }
 
+  updateUnidad(id : number , unidad : Unidad) : Observable <any>{
+      return this.http.put<Unidad>(this.urlApi + '/unidad', { id, unidad }, { observe: 'body' }).pipe(res=>res);
+  }
 
+  deleteUnidad(id: number): Observable<any> {
+      return this.http.delete<Unidad>(this.urlApi + '/unidad', {body : {id}}).pipe(res => res);
+  }
 
 
   //ASIGNACION

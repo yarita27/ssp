@@ -1,4 +1,4 @@
-import { Component,Inject } from '@angular/core';
+import { Component,Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,6 +9,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { Unidad } from '../unidades/unidades.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelect } from '@angular/material/select';
+import { RestService } from '../rest.service';
 
 interface Estado {
   value: boolean;
@@ -37,17 +38,39 @@ export class FormFieldPrefixSuffixExample {
   templateUrl: './dialog-edit-unidades.component.html',
   styleUrl: './dialog-edit-unidades.component.css'
 })
-export class DialogEditUnidadesComponent {
+export class DialogEditUnidadesComponent implements OnInit{
+  ngOnInit(): void {
+    // Add your initialization logic here
+  }
   hide: any;
   estados: Estado[] = [
     {value: false, viewValue: 'Desactivado'},
     {value: true, viewValue: 'Activado'},
   ];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any){
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private restService: RestService
+  ){}     
 
-  }
   onInit(){
-
   }
+
+  editarPrevio(value: any){
+    console.log(value);
+    this.editarUnidad(value);
+    console.log("Editando Unidad...");
+  }
+
+
+  editarUnidad(value : Unidad) : void{
+    this.restService.updateUnidad(value.id, value).subscribe(
+      (result) => {
+        console.log(result);
+      }
+    );
+  };
+
+
+
 }
