@@ -36,8 +36,12 @@ export class RestService {
     return this.http.post<Criterio>(this.urlApi + '/criterio', criterio).pipe(res=>res);
   }
 
+  updateCriterio(id : number , criterio : Criterio) : Observable <any>{
+    return this.http.put<Criterio>(this.urlApi + '/criterio', { id, criterio }, { observe: 'body' }).pipe(res=>res);
+  }
+
   deleteCriterio( id : number) : Observable <any>{
-    return this.http.delete<Criterio>(this.urlApi + '/criterio').pipe(res=>res);
+    return this.http.delete<Criterio>(this.urlApi + '/criterio', {body : {id}}).pipe(res=>res);
   }
 
   //INDICADOR
@@ -49,10 +53,18 @@ export class RestService {
   getIndicadoresActivos() : Observable <Indicador[]>{
     return this.http.get<Indicador[]>(this.urlApi + '/indicador/activos').pipe(res=>res);
   }
+
   postIndicador(indicador : Indicador) : Observable <any>{
     return this.http.post<Indicador>(this.urlApi + '/indicador', indicador).pipe(res=>res);
   }
 
+  updateIndicador(id_criterio : number, id : number , indicador : Indicador) : Observable <any>{
+    return this.http.put<Indicador>(this.urlApi + '/indicador', { id_criterio, id, indicador }, { observe: 'body' }).pipe(res=>res);
+  }
+
+  deleteIndicador(id_criterio : number, id : number) : Observable <any>{
+    return this.http.delete<Indicador>(this.urlApi + '/indicador', {body : {id_criterio, id}}).pipe(res=>res);
+  }
 
 
   //UNIDAD

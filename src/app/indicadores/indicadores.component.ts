@@ -18,6 +18,7 @@ import { DialogEditUnidadesComponent } from '../dialog-edit-unidades/dialog-edit
 import { DialogIndicadoresComponent } from '../dialog-indicadores/dialog-indicadores.component';
 import { DialogCriteriosComponent } from '../dialog-criterios/dialog-criterios.component';
 import { RestService } from '../rest.service';
+import { DialogEditIndicadoresComponent } from '../dialog-edit-indicadores/dialog-edit-indicadores.component';
 
 export interface Indicador {
   id_criterio: number;
@@ -107,9 +108,32 @@ export class IndicadoresComponent implements AfterViewInit, OnInit{
     });
   }
 
-  modificarDialog() {
-    let dialogRef = this.dialog.open(DialogEditUnidadesComponent, {data:{name:'Yara'}});
 
+  modificarDialog(indicador : Indicador) {
+    let dialogRef = this.dialog.open(DialogEditIndicadoresComponent, {data:{indicador:indicador}});
+    console.log(indicador);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
   
+  eliminarPrevio(value : any) : void{
+    console.log(value);
+    this.eliminarIndicador(value.id_criterio, value.id);
+    console.log("Eliminando Indicador...");
+  }
+
+  eliminarIndicador(id_criterio: number, id: number){
+    
+    this.restService.deleteIndicador(id_criterio, id).subscribe({
+      next: (result) => {
+        console.log(result);
+        this.cargarIndicadores();
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
 }

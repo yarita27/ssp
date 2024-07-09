@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {DialogCriteriosComponent} from '../dialog-criterios/dialog-criterios.component';
 import { RestService } from '../rest.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DialogEditCriteriosComponent } from '../dialog-edit-criterios/dialog-edit-criterios.component';
 
 export interface Criterio {
   "id": number;
@@ -71,21 +72,6 @@ export class CriterioComponent implements AfterViewInit, OnInit{
     });
   }
 
-
-  eliminarCriterio(value : any) : void{ 
-    this.restService.deleteCriterio(value).subscribe(
-      (result) => {
-        console.log(result);
-      }
-    );
-  }
-
-  eliminarPrevio(value : any) : void{
-    //Aqui va el proceso previo a la eliminacion donde se toma los datos directo desde la tabla
-    //y se envia el id del criterio a eliminar , value es el objeto completo que tiene la 
-    //informacion del criterio en la fila seleccionada
-  };
-  
   displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'estado', 'accion'];
   dataSource = new MatTableDataSource(this.listaCriterios);
 
@@ -111,8 +97,31 @@ export class CriterioComponent implements AfterViewInit, OnInit{
     });
   }
 
-  modificarDialog() {
-    let dialogRef = this.dialog.open(DialogEditUnidadesComponent, {data:{name:'Yara'}});
+  modificarDialog(criterio : Criterio) {
+    let dialogRef = this.dialog.open(DialogEditCriteriosComponent, {data:{criterio:criterio}});
+    console.log(criterio);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
+
+  eliminarPrevio(value : any) : void{
+    console.log(value);
+    this.eliminarCriterio(value.id);
+    console.log("Eliminando Criterio...");
+  }
+
+  eliminarCriterio(id: number){
+    
+    this.restService.deleteCriterio(id).subscribe({
+      next: (result) => {
+        console.log(result);
+        this.cargarCriterios();
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
   }
 }
