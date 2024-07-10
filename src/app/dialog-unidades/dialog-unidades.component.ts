@@ -69,27 +69,5 @@ export class DialogUnidadesComponent implements OnInit{
     console.log("Guardando Unidad...");
   }
  
-  /*
-  cargarCriteriosActivos() : void{
-    this.restService.getCriteriosActivos().subscribe({
-      next: (result : any) => {
-        this.criteriosActivos = result;
-      },
-      error : (err) => {
-        console.error(err);
-      }
-    });
-  }
 
-  cargarIndicadoresActivos() : void{
-    this.restService.getIndicadoresActivos().subscribe({
-      next: (result : any) => {
-        this.indicadoresActivos = result;
-      },
-      error : (err) => {
-        console.error(err);
-      }
-    });
-  }
-*/
 }

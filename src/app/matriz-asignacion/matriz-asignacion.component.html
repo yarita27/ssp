@@ -1,20 +1,50 @@
 <!-- src/app/matriz-dinamica/matriz-dinamica.component.html -->
-<div class="matriz-container">
-    <table>
-      <thead>
-        <tr>
-          <th>Unidades / Indicadores</th>
-          <th *ngFor="let indicador of indicadores">{{ indicador.nombre }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let unidad of unidades; let i = index">
-          <td>{{ unidad.nombre }}</td>
-          <td *ngFor="let indicador of indicadores; let j = index">
-            <input type="text" [(ngModel)]="matriz[i][j]" />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+<div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px;">
+  <mat-card style="width: 100%; padding: 20px;">
+
+    <ng-container>
+      
+    </ng-container>
+
+    <ng-container>
+      <h4 style="padding: 20px;">Matriz de Asignación</h4>
+    </ng-container>
+
+  <!--
+  <div>
+      <button (click)="guardarMatriz()">Guardar</button>
   </div>
-  
+  -->
+  <div class="matriz-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Unidades / Indicadores</th>
+            <th *ngFor="let indicador of indicadores">{{ indicador.id_criterio }}.{{ indicador.id }} - {{ indicador.nombre }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let unidad of unidades; let i = index">
+            <td>{{ unidad.id }} - {{ unidad.nombre }}</td>
+            <td *ngFor="let indicador of indicadores; let j = index">
+              <input type="checkbox" [(ngModel)]="matriz[i][j].recomendado" (change)="toggleRecomendado(i, j)" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+    <!-- 
+    <ng-container style="justify-content: end;">
+      <button mat-raised-button color="primary" height="50px" width="50px" (click)="guardarAsignaciones()">AA</button>
+    </ng-container>
+    -->
+
+    <div style="justify-content: end;">
+      <!--Boton de Registrar Usuario-->
+      <button mat-raised-button color="primary" height="50px" width="50px" >Guardar Asignaciones</button>
+    </div>
+</mat-card>
+
+</div>

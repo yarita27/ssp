@@ -93,9 +93,31 @@ export class RestService {
   //ASIGNACION
   //Obtener todas las asignaciones  
   getAsignaciones() : Observable <any>{
-    return this.http.get<any>(this.urlApi + '/asignacion').pipe(res=>res);
+    return this.http.get<any>(this.urlApi + '/asignacion/all').pipe(res=>res);
   }
 
+  getAsignacionesByAnio(anio: number): Observable<any> {
+    return this.http.get<any>(`${this.urlApi}/asignacion/${anio}`).pipe(res => res);
+  }
+
+  getAniosAsignados(): Observable <any> {
+      return this.http.get<any>(this.urlApi + '/asignacion/anios/actuales').pipe(res=>res);
+  }
+
+
+  getIndicadoresByAnio(anio: number): Observable<any> {
+    return this.http.get<any>(`${this.urlApi}/asignacion/indicadores/${anio}`).pipe(res => res);
+  }
+
+
+  getUnidadesByAnio(anio: number): Observable<any> {
+    return this.http.get<any>(`${this.urlApi}/asignacion/unidades/${anio}`).pipe(res => res);
+  }
+
+
+  guardarMatriz(matriz : any) : Observable <any>{
+    return this.http.post<any>(this.urlApi + '/asignacion', matriz).pipe(res=>res);
+  }
 
 
 }
