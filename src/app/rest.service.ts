@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Criterio } from './criterio/criterio.component';
 import { Indicador } from './indicadores/indicadores.component';
 import { Unidad } from './unidades/unidades.component';
+import { Asignacion } from './matriz-asignacion/matriz-asignacion.component';
 
 @Injectable({
   providedIn: 'root'
@@ -115,8 +116,8 @@ export class RestService {
   }
 
 
-  guardarMatriz(matriz : any) : Observable <any>{
-    return this.http.post<any>(this.urlApi + '/asignacion', matriz).pipe(res=>res);
+  guardarMatriz(asignaciones : Asignacion[]) : Observable <any>{
+    return this.http.put<Asignacion[]>(this.urlApi + '/asignacion/matriz', asignaciones).pipe(res=>res);
   }
 
 

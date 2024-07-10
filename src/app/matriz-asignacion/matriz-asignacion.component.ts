@@ -12,6 +12,9 @@ import { Indicador } from '../indicadores/indicadores.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { DialogAsignacionesComponent } from '../dialog-asignaciones/dialog-asignaciones.component';
 
 export interface Asignacion {
   anio: number;
@@ -37,12 +40,14 @@ export interface Asignacion {
     MatRow,
     MatRowDef,
     MatFormField,
+    MatOptionModule,
     MatLabel,
     FormsModule,
     CommonModule,
     MatDialogModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ],
   templateUrl: './matriz-asignacion.component.html',
   styleUrls: ['./matriz-asignacion.component.css']
@@ -54,31 +59,44 @@ export class MatrizAsignacionComponent {
   matriz: Asignacion[][] = [];
   asignaciones: Asignacion[] = [];
 
-  unidadesActivas: Unidad[] = [];
-  indicadoresActivos: Indicador[] = [];
-  
+
+  aniosAsignados: number[] = [];
+  anioPrueba: number = 2021;
+  //anioPrueba: number = new Date().getFullYear();
+
   constructor(
     private restService: RestService,
     public dialog: MatDialog
   ) { }
 
-  
+  registrarDialog() {
+    let dialogRef = this.dialog.open(DialogAsignacionesComponent, {data:{name:'Yara'}});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   ngOnInit(): void {
-    const anioPrueba: number = 2021;
+    console.log(this.anioPrueba);
+    this.inicializarMatriz();
+  }
 
-    this.restService.getAsignacionesByAnio(anioPrueba).subscribe(asignaciones => {
+  inicializarMatriz(): void {
+    this.cargarAniosAsignados();
+
+
+    this.restService.getAsignacionesByAnio(this.anioPrueba).subscribe(asignaciones => {
       this.asignaciones = asignaciones;
       this.crearMatriz();
     });
 
-    this.restService.getUnidadesByAnio(anioPrueba).subscribe(unidades => {
+    this.restService.getUnidadesByAnio(this.anioPrueba).subscribe(unidades => {
       this.unidades = unidades;
       this.crearMatriz();
     });
   
 
-    this.restService.getIndicadoresByAnio(anioPrueba).subscribe(indicadores => {
+    this.restService.getIndicadoresByAnio(this.anioPrueba).subscribe(indicadores => {
       this.indicadores = indicadores;
       this.crearMatriz();
     });
@@ -114,47 +132,62 @@ export class MatrizAsignacionComponent {
     }
   }
 
-  toggleRecomendado(unidadIndex: number, indicadorIndex: number): void {
-    this.matriz[unidadIndex][indicadorIndex].recomendado = !this.matriz[unidadIndex][indicadorIndex].recomendado;
-  }
-
-  guardarMatriz(): void {
-    /*
-    const matriz = this.matriz.map((fila, i) => fila.map((valor, j) => ({ id_unidad: this.unidades[i].id, id_indicador: this.indicadores[j].id, valor })));
-    this.restService.guardarMatriz(matriz).subscribe({
-      next: (result) => {
-        console.log(result);
+  cargarAniosAsignados() : void{
+    this.restService.getAniosAsignados().subscribe({
+      next: (result : any) => {
+        this.aniosAsignados = result;
       },
-      error: (err) => {
+      error : (err) => {
         console.error(err);
       }
     });
-    */
   }
+
+  seleccionarAnio(value: number): void {
+    this.anioPrueba = value;
+    this.inicializarMatriz();
+  }
+
+  toggleRecomendado(i: number, j: number): void {
+    // Actualiza el estado de recomendado en la matriz
+    const estadoRecomendado = this.matriz[i][j].recomendado;
+  
+    // Encuentra la asignación correspondiente en el arreglo de asignaciones y actualiza su estado
+    const asignacion = this.asignaciones.find(asignacion => 
+      asignacion.id_unidad === this.unidades[i].id && 
+      asignacion.id_indicador === this.indicadores[j].id
+    );
+  
+    if (asignacion) {
+      asignacion.recomendado = estadoRecomendado;
+    }
+  }
+
+
+  //guardarAsignaciones(): void {
+    // Aquí puedes implementar la lógica para guardar las asignaciones, por ejemplo, enviándolas a un servidor
+ //   console.log('Asignaciones guardadas', this.matriz);
+  //}
 
   guardarAsignaciones(): void {
-    // Aquí puedes implementar la lógica para guardar las asignaciones, por ejemplo, enviándolas a un servidor
-    console.log('Asignaciones guardadas', this.matriz);
-  }
-
-  cargarUnidadesActivas() : void{
-    this.restService.getUnidadesActivas().subscribe({
-      next: (result : any) => {
-        this.unidadesActivas = result;
-      },
-      error : (err) => {
-        console.error(err);
+    // Recorre la matriz para obtener las asignaciones modificadas
+    const asignacionesModificadas: Asignacion[] = [];
+    for (let i = 0; i < this.matriz.length; i++) {
+      for (let j = 0; j < this.matriz[i].length; j++) {
+        if (this.matriz[i][j]) {
+          asignacionesModificadas.push(this.matriz[i][j]);
+        }
       }
-    });
-  }
+      console.log(asignacionesModificadas);
+    }
 
-  cargarIndicadoresActivos() : void{
-    this.restService.getIndicadoresActivos().subscribe({
-      next: (result : any) => {
-        this.indicadoresActivos = result;
+    // Envía las asignaciones modificadas al servidor
+    this.restService.guardarMatriz(asignacionesModificadas).subscribe({
+      next: response => {
+        console.log('Asignaciones guardadas', response);
       },
-      error : (err) => {
-        console.error(err);
+      error: error => {
+        console.error('Error al guardar asignaciones', error);
       }
     });
   }

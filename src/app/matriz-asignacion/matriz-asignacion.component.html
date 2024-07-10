@@ -3,39 +3,59 @@
 <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px;">
   <mat-card style="width: 100%; padding: 20px;">
 
-    <ng-container>
+   
+
+    <div class="seleccion-anio">
+      <button mat-raised-button color="primary" height="50px" width="50px" (click)="registrarDialog()">Agregar Indicador</button>
+
+      <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
+        <mat-label>Años a Visualizar</mat-label>
+        <mat-select [(ngModel)]="anioPrueba" name="anio">
+          <mat-option *ngFor="let anio of aniosAsignados" [value]="anio">
+            {{ anio }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <button (click)="seleccionarAnio(anioPrueba)" mat-raised-button color="primary" style="height: 50px; width: 100%;">Seleccionar Año</button>
+    </div>
+
+
       
-    </ng-container>
-
-    <ng-container>
-      <h4 style="padding: 20px;">Matriz de Asignación</h4>
-    </ng-container>
-
   <!--
   <div>
       <button (click)="guardarMatriz()">Guardar</button>
   </div>
   -->
   <div class="matriz-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Unidades / Indicadores</th>
-            <th *ngFor="let indicador of indicadores">{{ indicador.id_criterio }}.{{ indicador.id }} - {{ indicador.nombre }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let unidad of unidades; let i = index">
-            <td>{{ unidad.id }} - {{ unidad.nombre }}</td>
-            <td *ngFor="let indicador of indicadores; let j = index">
-              <input type="checkbox" [(ngModel)]="matriz[i][j].recomendado" (change)="toggleRecomendado(i, j)" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <table>
+      <thead>
+        <tr>
+          <th>Unidades / Indicadores</th>
+          <th *ngFor="let indicador of indicadores">{{ indicador.id_criterio }}.{{ indicador.id }} - {{ indicador.nombre }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let unidad of unidades; let i = index">
+          <td>{{ unidad.id }} - {{ unidad.nombre }}</td>
+          <td *ngFor="let indicador of indicadores; let j = index">
+            <mat-checkbox [(ngModel)]="matriz[i][j].recomendado" (change)="toggleRecomendado(i, j)">
+            </mat-checkbox>
+          </td>
+        </tr>
+      </tbody>
+    </table>
       
     </div>
     <!-- 
+    <div *ngFor="let asignacion of asignaciones">
+      <mat-checkbox [(ngModel)]="asignacion.recomendado">
+        {{ asignacion.anio }} - {{ asignacion.id_unidad }} - {{ asignacion.id_indicador }}
+      </mat-checkbox>
+    </div>
+    <button (click)="guardarAsignaciones()" mat-raised-button color="primary">Guardar Asignaciones</button>
+    
+
     <ng-container style="justify-content: end;">
       <button mat-raised-button color="primary" height="50px" width="50px" (click)="guardarAsignaciones()">AA</button>
     </ng-container>
@@ -43,7 +63,7 @@
 
     <div style="justify-content: end;">
       <!--Boton de Registrar Usuario-->
-      <button mat-raised-button color="primary" height="50px" width="50px" >Guardar Asignaciones</button>
+      <button mat-raised-button (click)="guardarAsignaciones()" color="primary" height="50px" width="50px" >Guardar Asignaciones</button>
     </div>
 </mat-card>
 

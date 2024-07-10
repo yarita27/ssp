@@ -5,6 +5,13 @@
   margin: 20px;
 }
 
+.seleccion-anio {
+  justify-content: center;
+  margin: 20px;
+  max-width:min-content; 
+  padding: 20px
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
