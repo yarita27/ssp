@@ -155,7 +155,8 @@ export class MatrizAsignacionComponent {
     // Encuentra la asignación correspondiente en el arreglo de asignaciones y actualiza su estado
     const asignacion = this.asignaciones.find(asignacion => 
       asignacion.id_unidad === this.unidades[i].id && 
-      asignacion.id_indicador === this.indicadores[j].id
+      asignacion.id_indicador === this.indicadores[j].id && 
+      asignacion.id_criterio === this.indicadores[j].id_criterio
     );
   
     if (asignacion) {
@@ -163,26 +164,9 @@ export class MatrizAsignacionComponent {
     }
   }
 
-
-  //guardarAsignaciones(): void {
-    // Aquí puedes implementar la lógica para guardar las asignaciones, por ejemplo, enviándolas a un servidor
- //   console.log('Asignaciones guardadas', this.matriz);
-  //}
-
   guardarAsignaciones(): void {
-    // Recorre la matriz para obtener las asignaciones modificadas
-    const asignacionesModificadas: Asignacion[] = [];
-    for (let i = 0; i < this.matriz.length; i++) {
-      for (let j = 0; j < this.matriz[i].length; j++) {
-        if (this.matriz[i][j]) {
-          asignacionesModificadas.push(this.matriz[i][j]);
-        }
-      }
-      console.log(asignacionesModificadas);
-    }
-
     // Envía las asignaciones modificadas al servidor
-    this.restService.guardarMatriz(asignacionesModificadas).subscribe({
+    this.restService.guardarMatriz(this.asignaciones).subscribe({
       next: response => {
         console.log('Asignaciones guardadas', response);
       },

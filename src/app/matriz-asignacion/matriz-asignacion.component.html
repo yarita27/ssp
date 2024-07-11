@@ -3,11 +3,9 @@
 <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px;">
   <mat-card style="width: 100%; padding: 20px;">
 
-   
+    <button mat-raised-button color="primary" height="50px" width="flex" (click)="registrarDialog()">Agregar Asignaciones</button>
 
     <div class="seleccion-anio">
-      <button mat-raised-button color="primary" height="50px" width="50px" (click)="registrarDialog()">Agregar Indicador</button>
-
       <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
         <mat-label>Años a Visualizar</mat-label>
         <mat-select [(ngModel)]="anioPrueba" name="anio">
