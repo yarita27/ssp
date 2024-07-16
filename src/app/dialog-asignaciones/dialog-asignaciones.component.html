@@ -1,12 +1,11 @@
-<h2 mat-dialog-title>Registro de Indicadores</h2>
+
 <form [formGroup]="form" (ngSubmit)="registrarPrevio()"  class="gestionAsignacion">  
 <mat-dialog-content>
-    
     <h1 style="font-size: medium;">Indica los datos de la nueva Matriz de Asignacion</h1>
 
     <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>Anio de las Asignaciones</mat-label>
-        <input matInput placeholder="e.g., 2024" type="number" [formControl]="control">
+        <input matInput placeholder="e.g., 2024" type="number" name="anio" formControlName="anio">
     </mat-form-field>
 <!--    
     <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
@@ -24,7 +23,7 @@
 
     <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
         <mat-label>ID de Criterio</mat-label>
-        <mat-select  [formControl]="criterioControl" multiple type="number" name="id_criterio" >
+        <mat-select  [formControl]="criterioControl" multiple name="id_criterio" >
             <mat-select-trigger>
                 {{criteriosActivos[0]?.nombre || ''}}
                 <span If="criteriosActivos.length > 1" class="seleccion-criterios">
@@ -32,7 +31,7 @@
                 </span>
             </mat-select-trigger>
             @for (criterio of criteriosActivos; track criterio) {
-                <mat-option [value]="criterio.id">{{criterio.id + ' - ' + criterio.nombre}}</mat-option>
+                <mat-option [value]="criterio">{{criterio.id + ' - ' + criterio.nombre}}</mat-option>
               }
         </mat-select>
     </mat-form-field>
@@ -47,7 +46,7 @@
                 </span>
             </mat-select-trigger>
             @for (indicador of indicadoresActivos; track indicador) {
-                <mat-option [value]="indicador.id">{{indicador.id_criterio + '.' + indicador.id + ' - ' + indicador.nombre}}</mat-option>
+                <mat-option [value]="indicador">{{indicador.id_criterio + '.' + indicador.id + ' - ' + indicador.nombre}}</mat-option>
               }
         </mat-select>
     </mat-form-field>
@@ -63,7 +62,7 @@
                 </span>
             </mat-select-trigger>
             @for (unidad of unidadesActivas; track unidad) {
-                <mat-option [value]="unidad.id">{{unidad.id + ' - ' + unidad.nombre}}</mat-option>
+                <mat-option [value]="unidad">{{unidad.id + ' - ' + unidad.nombre}}</mat-option>
               }
         </mat-select>
     </mat-form-field>

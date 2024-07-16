@@ -3,7 +3,18 @@
 <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px;">
   <mat-card style="width: 100%; padding: 20px;">
 
-    <button mat-raised-button color="primary" height="50px" width="flex" (click)="registrarDialog()">Agregar Asignaciones</button>
+    <mat-card-header>
+      <button mat-raised-button color="primary" height="50px" width="flex" (click)="registrarDialog()"
+      >Crear Nueva Matriz <mat-icon aria-hidden="false" fontIcon="add"></mat-icon>
+      </button>
+
+      <button mat-raised-button color="primary" height="50px" width="flex" (click)="registrarDialog()"
+      >Duplicar Matriz Anterior <mat-icon aria-hidden="false" fontIcon="file_copy"></mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      
+    </mat-card-content>
 
     <div class="seleccion-anio">
       <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
@@ -14,10 +25,8 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-    
       <button (click)="seleccionarAnio(anioPrueba)" mat-raised-button color="primary" style="height: 50px; width: 100%;">Seleccionar Año</button>
     </div>
-
 
       
   <!--
@@ -61,7 +70,9 @@
 
     <div style="justify-content: end;">
       <!--Boton de Registrar Usuario-->
-      <button mat-raised-button (click)="guardarAsignaciones()" color="primary" height="50px" width="50px" >Guardar Asignaciones</button>
+      <button mat-raised-button (click)="guardarAsignaciones()" color="primary" height="50px" width="50px" 
+      >Guardar Matriz <mat-icon aria-hidden="false" fontIcon="check_circle"></mat-icon>
+      </button>
     </div>
 </mat-card>
 

@@ -14,7 +14,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { DialogAsignacionesComponent } from '../dialog-asignaciones/dialog-asignaciones.component';
+import { DialogMatrizComponent } from '../dialog-matriz/dialog-matriz.component';
+import { MatIconModule } from '@angular/material/icon';
 
 export interface Asignacion {
   anio: number;
@@ -47,7 +48,8 @@ export interface Asignacion {
     MatDialogModule,
     MatCardModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule
   ],
   templateUrl: './matriz-asignacion.component.html',
   styleUrls: ['./matriz-asignacion.component.css']
@@ -70,7 +72,7 @@ export class MatrizAsignacionComponent {
   ) { }
 
   registrarDialog() {
-    let dialogRef = this.dialog.open(DialogAsignacionesComponent, {data:{name:'Yara'}});
+    let dialogRef = this.dialog.open(DialogMatrizComponent, {data:{name:'Yara'}});
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

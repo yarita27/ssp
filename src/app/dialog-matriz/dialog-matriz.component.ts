@@ -13,8 +13,19 @@ import { Indicador } from '../indicadores/indicadores.component';
 import { Criterio } from '../criterio/criterio.component';
 import { MatListModule } from '@angular/material/list';
 
+export interface Asignacion {
+  anio: number;
+  id_unidad: number;
+  id_criterio: number;
+  id_indicador: number;
+  recomendado: boolean;
+  doc_respuesta: string | null;
+  fecha_respuesta: Date | null;
+  completado: boolean;
+
+}
 @Component({
-  selector: 'app-dialog-asignaciones',
+  selector: 'app-dialog-matriz',
   standalone: true,
   imports: [
     MatDialogModule,
@@ -35,10 +46,10 @@ import { MatListModule } from '@angular/material/list';
     FormControl,
     ReactiveFormsModule
   ],
-  templateUrl: './dialog-asignaciones.component.html',
-  styleUrl: './dialog-asignaciones.component.css'
+  templateUrl: './dialog-matriz.component.html',
+  styleUrl: './dialog-matriz.component.css'
 })
-export class DialogAsignacionesComponent implements OnInit {
+export class DialogMatrizComponent  implements OnInit {
 
 
   form: FormGroup = new FormGroup({});
