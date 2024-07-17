@@ -12,6 +12,9 @@ import { Unidad } from '../unidades/unidades.component';
 import { Indicador } from '../indicadores/indicadores.component';
 import { Criterio } from '../criterio/criterio.component';
 import { MatListModule } from '@angular/material/list';
+import { error } from 'console';
+import { subscribe } from 'diagnostics_channel';
+
 
 export interface Asignacion {
   anio: number;
@@ -82,7 +85,7 @@ export class DialogMatrizComponent  implements OnInit {
     this.cargarIndicadoresActivos();
 
     this.form = this.fb.group({
-      anio: null, // Provide a default value for the 'anio' property
+      anio: null,
       id_criterio: this.criterioControl,
       id_indicador: this.indicadorControl,
       id_unidad: this.unidadControl
@@ -102,12 +105,83 @@ export class DialogMatrizComponent  implements OnInit {
   }
 
   //TODAVIDA NO ESTA DESARROLLADOOOOOOOOOOOOOOO
-  registrarPrevio() : void{
+  Previo() : void{
     console.log('Año:', this.form.value.anio);
     console.log('Criterios seleccionados:', this.criteriosSeleccionados);
     console.log('Indicadores seleccionados:', this.indicadoresSeleccionados);
     console.log('Unidades seleccionadas:', this.unidadesSeleccionadas);
   }
+/*
+  registrarPrevio(): void {
+    const anio = this.form.value.anio;
+    const asignaciones: Asignacion[] = [];
+  
+    this.unidadesSeleccionadas.forEach(unidad => {
+      const id_unidad = unidad.id;
+      this.indicadoresSeleccionados.forEach(id_indicador => {
+      const indicador = this.indicadoresActivos.find(ind => ind.id === id_indicador.id);
+      if (indicador) {
+        const id_criterio = indicador.id_criterio; // Accede al id_criterio del indicador
+        const asignar: Asignacion = {
+        anio,
+        id_unidad: id_unidad,
+        id_indicador: id_indicador.id,
+        id_criterio: id_criterio, // Usa el id_criterio del indicador
+        recomendado: false,
+        doc_respuesta: null,
+        fecha_respuesta: null,
+        completado: false
+        };
+        asignaciones.push(asignar);
+      }
+      });
+    });
+  
+    console.log('Asignaciones:', asignaciones);
+    // Aquí puedes manejar el envío de las asignaciones al servidor o cualquier otra lógica necesaria
+  }
+  */
+
+  registrarPrevio(): void {
+    const anio = this.form.value.anio;
+    const asignaciones: Asignacion[] = [];
+    const combinacionesUnicas = new Set<string>();
+
+    this.unidadesSeleccionadas.forEach(unidad => {
+        const id_unidad = unidad.id;
+        this.indicadoresSeleccionados.forEach(id_indicador => {
+            const indicador = this.indicadoresActivos.find(ind => ind.id === id_indicador.id && ind.id_criterio === id_indicador.id_criterio);
+            if (indicador) {
+                const id_criterio = indicador.id_criterio;
+
+                    const asignar: Asignacion = {
+                        anio,
+                        id_unidad: id_unidad,
+                        id_indicador: id_indicador.id,
+                        id_criterio: id_criterio,
+                        recomendado: false,
+                        doc_respuesta: null,
+                        fecha_respuesta: null,
+                        completado: false
+                    };
+                    asignaciones.push(asignar);
+                
+            }
+        });
+    });
+
+    console.log('Asignaciones:', asignaciones);
+    
+    this.restService.registrarMatrizAsignaciones(asignaciones).subscribe({
+      next: (result : any) => {
+        console.log('Asignaciones:', result);
+      },
+      error : (err: any) => {
+        console.error(err);
+      }
+    });
+  }
+
 
   cargarUnidadesActivas() : void{
     this.restService.getUnidadesActivas().subscribe({

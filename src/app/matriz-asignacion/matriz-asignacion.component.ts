@@ -16,6 +16,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { DialogMatrizComponent } from '../dialog-matriz/dialog-matriz.component';
 import { MatIconModule } from '@angular/material/icon';
+import { DialogDuplicarMatrizComponent } from '../dialog-duplicar-matriz/dialog-duplicar-matriz.component';
 
 export interface Asignacion {
   anio: number;
@@ -75,6 +76,14 @@ export class MatrizAsignacionComponent {
     let dialogRef = this.dialog.open(DialogMatrizComponent, {data:{name:'Yara'}});
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  duplicarDialog() {
+    let dialogRef = this.dialog.open(DialogDuplicarMatrizComponent, {data:{name:'Yara'}});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result
+      }`);
     });
   }
 
