@@ -17,10 +17,6 @@ interface Estado {
   viewValue: string;
 }
 
-export class FormFieldPrefixSuffixExample {
-  hide = true;
-}
-
 @Component({
   selector: 'app-dialog-edit-indicadores',
   standalone: true,

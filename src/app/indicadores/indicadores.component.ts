@@ -69,12 +69,17 @@ export class IndicadoresComponent implements AfterViewInit, OnInit{
     this.restService.getIndicadores().subscribe({
       next: (result : any) => {
         this.listaIndicadores = result;
+        this.ordenarIndicadoresPorCriterio();
         this.dataSource = new MatTableDataSource(this.listaIndicadores);
       },
       error: (err) => {
         console.error(err);
       }
     });
+  }
+
+  ordenarIndicadoresPorCriterio(): void {
+    this.listaIndicadores.sort((a, b) => a.id_criterio - b.id_criterio);
   }
 
   displayedColumns: string[] = ['id_criterio', 'id', 'nombre', 'descripcion', 'doc_respuesta', 'estado', 'accion'];

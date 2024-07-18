@@ -115,6 +115,9 @@ export class RestService {
     return this.http.get<any>(`${this.urlApi}/asignacion/unidades/${anio}`).pipe(res => res);
   }
 
+  updateAsignacion(asignacion: Asignacion): Observable<any> {
+    return this.http.put<any>(`${this.urlApi}/asignacion`, asignacion).pipe(res => res);
+  }
 
   guardarMatriz(asignaciones : Asignacion[]) : Observable <any>{
     return this.http.put<Asignacion[]>(this.urlApi + '/asignacion/matriz', asignaciones).pipe(res=>res);

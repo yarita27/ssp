@@ -1,76 +1,55 @@
-
-<form [formGroup]="form" (ngSubmit)="registrarPrevio()"  class="gestionAsignacion">  
+<h2 mat-dialog-title>Modificacion de Asignacion</h2>
+<form #formAsignacion="ngForm" (ngSubmit)="editarPrevio(formAsignacion.value)" class="gestionAsignaciones">
 <mat-dialog-content>
-    <h1 style="font-size: medium;">Indica los datos de la nueva Matriz de Asignacion</h1>
+
+    <h1 style="font-size: medium;"> Indica los datos de la asignacion {{data.asignacion}} </h1>
+
+
+    <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
+        <mat-label>ID de Criterio</mat-label>
+        <input matInput readonly="true" type="number" name="id_criterio" [(ngModel)]="data.asignacion.id_criterio">
+    </mat-form-field>
 
     <mat-form-field appearance="outline" style="width: 100%;">
-        <mat-label>Anio de las Asignaciones</mat-label>
-        <input matInput placeholder="e.g., 2024" type="number" name="anio" formControlName="anio">
-    </mat-form-field>
-<!--    
-    <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
-        <mat-label>ID de Criterio</mat-label>
-        <mat-select > 
-            <mat-selection-list type="number" name="id_criterio" ngModel>
-                @for (criterio of criteriosActivos; track criterio) {
-                  <mat-list-option [value]="criterio.id">{{criterio.id + ' - ' + criterio.nombre}}</mat-list-option>
-                }
-                <mat-option></mat-option>
-            </mat-selection-list>
-        </mat-select> 
-    </mat-form-field>
--->
-
-    <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
-        <mat-label>ID de Criterio</mat-label>
-        <mat-select  [formControl]="criterioControl" multiple name="id_criterio" >
-            <mat-select-trigger>
-                {{criteriosActivos[0]?.nombre || ''}}
-                <span If="criteriosActivos.length > 1" class="seleccion-criterios">
-                    (+{{criteriosActivos.length - 1}} {{criteriosActivos.length === 2 ? 'other' : 'others'}})
-                </span>
-            </mat-select-trigger>
-            @for (criterio of criteriosActivos; track criterio) {
-                <mat-option [value]="criterio">{{criterio.id + ' - ' + criterio.nombre}}</mat-option>
-              }
-        </mat-select>
-    </mat-form-field>
-    
-    <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
         <mat-label>ID de Indicador</mat-label>
-        <mat-select [formControl]="indicadorControl" multiple name="id_indicador">
-            <mat-select-trigger>
-                {{indicadoresActivos[0]?.nombre || ''}}
-                <span If="indicadoresActivos.length > 1" class="seleccion-indicadores">
-                    (+{{indicadoresActivos.length - 1}} {{indicadoresActivos.length === 2 ? 'other' : 'others'}})
-                </span>
-            </mat-select-trigger>
-            @for (indicador of indicadoresActivos; track indicador) {
-                <mat-option [value]="indicador">{{indicador.id_criterio + '.' + indicador.id + ' - ' + indicador.nombre}}</mat-option>
-              }
-        </mat-select>
+        <input matInput readonly="true" type="number" name="id_indicador" [(ngModel)]="data.asignacion.id_indicador">
     </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>ID de Unidad</mat-label>
+        <input matInput readonly="true" type="number" name="id_asignacion" [(ngModel)]="data.asignacion.id_unidad">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Estado Recomendado / No Recomendado</mat-label>
+        <input matInput readonly="true" name="recomendado" [(ngModel)]="data.asignacion.recomendado">
+        <span>{{ data.asignacion.recomendado ? 'Recomendado' : 'No Recomendado' }}</span>
+    </mat-form-field>
+
 
 
     <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
-        <mat-label>ID de Unidad</mat-label>
-        <mat-select [formControl]="unidadControl" multiple name="id_unidad">
-            <mat-select-trigger>
-                {{indicadoresActivos[0]?.nombre || ''}}
-                <span If="indicadoresActivos.length > 1" class="seleccion-indicadores">
-                    (+{{indicadoresActivos.length - 1}} {{indicadoresActivos.length === 2 ? 'other' : 'others'}})
-                </span>
-            </mat-select-trigger>
-            @for (unidad of unidadesActivas; track unidad) {
-                <mat-option [value]="unidad">{{unidad.id + ' - ' + unidad.nombre}}</mat-option>
-              }
+        <mat-label>Estado Completado / Incompleto</mat-label>
+        <mat-select type="boolean" name="completado" [(ngModel)]="data.asignacion.completado">
+            <mat-option [value]="true">Completado</mat-option>
+            <mat-option [value]="false">Incompleto</mat-option>
         </mat-select>
     </mat-form-field>
 
-</mat-dialog-content> 
+    <!--
+    <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
+        <mat-label>Estado Criterio</mat-label>
+        <mat-select type="boolean" name="estado" [(ngModel)]="data.indicador.estado">
+            @for (estado of estados; track estado) {
+              <mat-option [value]="estado.value">{{estado.viewValue}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+    -->
+
+</mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button mat-dialog-close mat-dialog-close="false">Cancelar</button>
-    <button mat-button type="submit" mat-dialog-close mat-dialog-close="true">Registrar</button>
+    <button mat-button type="submit" mat-dialog-close mat-dialog-close="true">Modificar</button>
 </mat-dialog-actions>
-
 </form>

@@ -118,10 +118,15 @@ export class MatrizAsignacionComponent {
 
     this.restService.getIndicadoresByAnio(this.anioPrueba).subscribe(indicadores => {
       this.indicadores = indicadores;
+      this.ordenarIndicadoresPorCriterio();
       this.crearMatriz();
     });
-  }
 
+  }
+  
+  ordenarIndicadoresPorCriterio(): void {
+    this.indicadores.sort((a, b) => a.id_criterio - b.id_criterio);
+  }
 
   /**
    * Crea una matriz de asignaciones basada en las unidades y los indicadores disponibles.

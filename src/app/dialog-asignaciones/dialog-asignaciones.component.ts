@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormField, MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import { MatLabel } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -12,6 +12,9 @@ import { Unidad } from '../unidades/unidades.component';
 import { Indicador } from '../indicadores/indicadores.component';
 import { Criterio } from '../criterio/criterio.component';
 import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { Asignacion } from '../dialog-matriz/dialog-matriz.component';
+
 
 @Component({
   selector: 'app-dialog-asignaciones',
@@ -30,10 +33,12 @@ import { MatListModule } from '@angular/material/list';
     MatOption,
     MatListModule,
     MatSelectModule,
+    MatIconModule,
+    
   ],
   providers: [
     FormControl,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './dialog-asignaciones.component.html',
   styleUrl: './dialog-asignaciones.component.css'
@@ -88,6 +93,20 @@ export class DialogAsignacionesComponent implements OnInit {
     this.unidadControl.valueChanges.subscribe((selectedUnidades: any) => {
       this.unidadesSeleccionadas = selectedUnidades || [];
     });
+  }
+
+  editarPrevio(value: any){
+    console.log(value);
+    this.editarAsignacion(value);
+    console.log("Editando Asignacion...");
+  }
+
+  editarAsignacion(value : Asignacion) : void{
+    this.restService.updateAsignacion(value).subscribe(
+      (result) => {
+        console.log(result);
+      }
+    );
   }
 
   //TODAVIDA NO ESTA DESARROLLADOOOOOOOOOOOOOOO
