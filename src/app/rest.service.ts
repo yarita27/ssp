@@ -127,4 +127,8 @@ export class RestService {
   registrarMatrizAsignaciones(asignaciones: Asignacion[]): Observable<any> {
     return this.http.post<Asignacion[]>(this.urlApi + '/asignacion/matriz', asignaciones);
   }
+
+  deleteMatrizByAnio(anio: number): Observable<any> {
+    return this.http.delete<any>(`${this.urlApi}/asignacion/matriz/${anio}`, {}).pipe(res => res);;
+  }
 }
