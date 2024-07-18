@@ -15,7 +15,6 @@ import { MatListModule } from '@angular/material/list';
 import { error } from 'console';
 import { subscribe } from 'diagnostics_channel';
 
-
 export interface Asignacion {
   anio: number;
   id_unidad: number;
@@ -31,20 +30,20 @@ export interface Asignacion {
   selector: 'app-dialog-matriz',
   standalone: true,
   imports: [
-    MatDialogModule,
-    MatFormField,
-    MatFormFieldModule,
-    MatLabel,
-    MatButtonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatSelect,
-    MatOptionModule,
-    MatOption,
-    MatListModule,
-    MatSelectModule,
-  ],
+      MatDialogModule,
+      MatFormField,
+      MatFormFieldModule,
+      MatLabel,
+      MatButtonModule,
+      FormsModule,
+      ReactiveFormsModule,
+      MatInputModule,
+      MatSelect,
+      MatOptionModule,
+      MatOption,
+      MatListModule,
+      MatSelectModule
+    ],
   providers: [
     FormControl,
     ReactiveFormsModule
@@ -58,7 +57,7 @@ export class DialogMatrizComponent  implements OnInit {
   form: FormGroup = new FormGroup({});
 
   criterioControl = new FormControl([]);
-  indicadorControl = new FormControl([]);
+  indicadorControl = new FormControl<Indicador[]>([]);
   unidadControl = new FormControl([]);
 
   unidadesActivas: Unidad[] = [];
@@ -102,50 +101,13 @@ export class DialogMatrizComponent  implements OnInit {
     this.unidadControl.valueChanges.subscribe((selectedUnidades: any) => {
       this.unidadesSeleccionadas = selectedUnidades || [];
     });
+    
   }
 
-  //TODAVIDA NO ESTA DESARROLLADOOOOOOOOOOOOOOO
-  Previo() : void{
-    console.log('Año:', this.form.value.anio);
-    console.log('Criterios seleccionados:', this.criteriosSeleccionados);
-    console.log('Indicadores seleccionados:', this.indicadoresSeleccionados);
-    console.log('Unidades seleccionadas:', this.unidadesSeleccionadas);
-  }
-/*
-  registrarPrevio(): void {
-    const anio = this.form.value.anio;
-    const asignaciones: Asignacion[] = [];
-  
-    this.unidadesSeleccionadas.forEach(unidad => {
-      const id_unidad = unidad.id;
-      this.indicadoresSeleccionados.forEach(id_indicador => {
-      const indicador = this.indicadoresActivos.find(ind => ind.id === id_indicador.id);
-      if (indicador) {
-        const id_criterio = indicador.id_criterio; // Accede al id_criterio del indicador
-        const asignar: Asignacion = {
-        anio,
-        id_unidad: id_unidad,
-        id_indicador: id_indicador.id,
-        id_criterio: id_criterio, // Usa el id_criterio del indicador
-        recomendado: false,
-        doc_respuesta: null,
-        fecha_respuesta: null,
-        completado: false
-        };
-        asignaciones.push(asignar);
-      }
-      });
-    });
-  
-    console.log('Asignaciones:', asignaciones);
-    // Aquí puedes manejar el envío de las asignaciones al servidor o cualquier otra lógica necesaria
-  }
-  */
 
   registrarPrevio(): void {
     const anio = this.form.value.anio;
     const asignaciones: Asignacion[] = [];
-    const combinacionesUnicas = new Set<string>();
 
     this.unidadesSeleccionadas.forEach(unidad => {
         const id_unidad = unidad.id;
@@ -181,6 +143,15 @@ export class DialogMatrizComponent  implements OnInit {
       }
     });
   }
+
+  onCriterioChange(event: any): void {
+    const selectedCriterios = event?.value || [];
+    const selectedIndicadores = this.indicadoresActivos.filter(indicador =>
+      selectedCriterios.some((criterio: { id: number; }) => criterio.id === indicador.id_criterio)
+    );
+    this.indicadorControl.setValue(selectedIndicadores);
+  }
+
 
 
   cargarUnidadesActivas() : void{

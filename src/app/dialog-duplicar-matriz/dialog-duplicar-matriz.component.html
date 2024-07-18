@@ -2,25 +2,16 @@
 <mat-dialog-content>
 
 
-        <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
-          <mat-label>Años a Visualizar</mat-label>
-          <mat-select [(ngModel)]="anioPrueba" name="anio">
-            <mat-option *ngFor="let anio of aniosAsignados;" [value]="anio">
-              {{ anio }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
         <div class="seleccion-anio">
           <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
-            <mat-label>Años a Visualizar</mat-label>
+            <mat-label>Año a Duplicar</mat-label>
             <mat-select [(ngModel)]="anioPrueba" name="anio">
               <mat-option *ngFor="let anio of aniosAsignados" [value]="anio">
                 {{ anio }}
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <button (click)="seleccionarAnio(anioPrueba)" mat-raised-button color="primary" style="height: 50px; width: 100%;">Seleccionar Año</button>
+          <button (submit)="true" mat-raised-button color="primary" style="height: 50px; width: 100%;">Seleccionar Año</button>
         </div>
 
 </mat-dialog-content>

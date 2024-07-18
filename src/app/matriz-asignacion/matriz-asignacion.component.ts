@@ -65,7 +65,7 @@ export class MatrizAsignacionComponent {
 
 
   aniosAsignados: number[] = [];
-  anioPrueba: number = 2021;
+  anioPrueba: number = new Date().getFullYear() -1;
   //anioPrueba: number = new Date().getFullYear();
 
   constructor(

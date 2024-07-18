@@ -14,6 +14,7 @@ import { Criterio } from '../criterio/criterio.component';
 import { MatListModule } from '@angular/material/list';
 import { Asignacion } from '../dialog-matriz/dialog-matriz.component';
 import { NgFor, NgForOf } from '@angular/common';
+import { getSystemErrorMap } from 'node:util';
 
 
 @Component({
@@ -42,7 +43,7 @@ import { NgFor, NgForOf } from '@angular/common';
 export class DialogDeleteMatrizComponent {
 
   aniosAsignados: number[] = [];
-  anioPrueba: number = 2023;
+  anioPrueba: number = new Date().getFullYear() -1;
  // trackByFn: TrackByFunction<number> = (index, item) => item;
 
   constructor(
@@ -67,11 +68,13 @@ export class DialogDeleteMatrizComponent {
   }
 
   seleccionarAnio(value: any): void {
-    this.eliminarPrevio(value.anio);
+      this.anioPrueba = value.anio;
+      console.log(value+" "+this.anioPrueba);
+      this.eliminarPrevio(this.anioPrueba);
   }
 
-  eliminarPrevio(value : any){
-    this.restService.deleteMatrizByAnio(value.anio).subscribe({
+  eliminarPrevio(value : number){
+    this.restService.deleteMatrizByAnio(value).subscribe({
       next: (result) => {
         console.log(result);
       },

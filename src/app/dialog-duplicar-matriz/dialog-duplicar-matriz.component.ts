@@ -42,7 +42,7 @@ import { NgFor, NgForOf } from '@angular/common';
 export class DialogDuplicarMatrizComponent {
 
   aniosAsignados: number[] = [];
-  anioPrueba: number = 2021;
+  anioPrueba: number = new Date().getFullYear() -1;
  // trackByFn: TrackByFunction<number> = (index, item) => item;
 
   constructor(
@@ -68,11 +68,25 @@ export class DialogDuplicarMatrizComponent {
 
   seleccionarAnio(value: any): void {
     this.anioPrueba = value.anio;
-    this.duplicarMatriz();
+    console.log(this.anioPrueba);
+    this.duplicarMatriz(this.anioPrueba); 
+    //this.duplicarMatrizExistente(this.anioPrueba);
   }
 
-  duplicarMatriz() {
-    this.restService.duplicarMatriz(this.anioPrueba).subscribe({
+  duplicarMatriz(anio: number): void {
+    this.restService.duplicarMatriz(anio).subscribe({
+      next: (result: any) => {
+        console.log(result);
+      },
+      error: (err: any) => {
+        console.error(err);    
+      }
+    });
+
+  }
+
+  duplicarMatrizExistente(anio: number): void {
+    this.restService.duplicarMatrizExistente(anio).subscribe({
       next: (result: any) => {
         console.log(result);
       },
@@ -81,5 +95,4 @@ export class DialogDuplicarMatrizComponent {
       }
     });
   }
-
 }

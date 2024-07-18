@@ -124,6 +124,10 @@ export class RestService {
     return this.http.post<any>(`${this.urlApi}/asignacion/duplicar/${anio}`, {}).pipe(res => res);
   }
 
+  duplicarMatrizExistente(anio: number): Observable<any> {
+    return this.http.put<any>(`${this.urlApi}/asignacion/duplicar/${anio}`, {}).pipe(res => res);
+  }
+
   registrarMatrizAsignaciones(asignaciones: Asignacion[]): Observable<any> {
     return this.http.post<Asignacion[]>(this.urlApi + '/asignacion/matriz', asignaciones);
   }
