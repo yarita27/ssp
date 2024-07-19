@@ -4,6 +4,10 @@
 
     <h1 style="font-size: medium;"> Indica los datos de la asignacion {{data.asignacion}} </h1>
 
+    <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
+        <mat-label>Anio de la Asignacion</mat-label>
+        <input matInput readonly="true" type="number" name="anio" [(ngModel)]="data.asignacion.anio">
+    </mat-form-field>
 
     <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
         <mat-label>ID de Criterio</mat-label>
@@ -17,7 +21,14 @@
 
     <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>ID de Unidad</mat-label>
-        <input matInput readonly="true" type="number" name="id_asignacion" [(ngModel)]="data.asignacion.id_unidad">
+        <input matInput readonly="true" type="number" name="id_unidad" [(ngModel)]="data.asignacion.id_unidad">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
+        <mat-label>Documento de Respuesta</mat-label>
+        <input matInput readonly name="doc_respuesta" [(ngModel)]="data.asignacion.doc_respuesta">
+        <button mat-button type="button" (click)="fileInput.click()">Subir Archivo</button>
+        <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)">
     </mat-form-field>
 
     <mat-form-field appearance="outline" style="width: 100%;">
@@ -25,8 +36,6 @@
         <input matInput readonly="true" name="recomendado" [(ngModel)]="data.asignacion.recomendado">
         <span>{{ data.asignacion.recomendado ? 'Recomendado' : 'No Recomendado' }}</span>
     </mat-form-field>
-
-
 
     <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
         <mat-label>Estado Completado / Incompleto</mat-label>

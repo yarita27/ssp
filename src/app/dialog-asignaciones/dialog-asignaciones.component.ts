@@ -68,7 +68,13 @@ export class DialogAsignacionesComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.data.asignacion.doc_respuesta = file.name;
+    }
+  }
 
   ngOnInit(): void {
     this.cargarCriteriosActivos();
@@ -97,8 +103,24 @@ export class DialogAsignacionesComponent implements OnInit {
 
   editarPrevio(value: any){
     console.log(value);
-    this.editarAsignacion(value);
+    let asignacion : Asignacion = {
+      id_unidad: value.id_unidad,
+      id_indicador: value.id_indicador,
+      id_criterio: value.id_criterio,
+      anio: value.anio,
+      recomendado: value.recomendado,
+      completado: value.completado, 
+      doc_respuesta: null,
+      fecha_respuesta: null
+    };
+
+    if(value.doc_respuesta != null){
+      asignacion.doc_respuesta = value.doc_respuesta;
+    }
+
+    this.editarAsignacion(asignacion);
     console.log("Editando Asignacion...");
+    console.log(asignacion);
   }
 
   editarAsignacion(value : Asignacion) : void{
