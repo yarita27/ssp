@@ -14,6 +14,8 @@ import { Criterio } from '../criterio/criterio.component';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { Asignacion } from '../dialog-matriz/dialog-matriz.component';
+import { buffer } from 'stream/consumers';
+import { stringify } from 'querystring';
 
 
 @Component({
@@ -73,6 +75,22 @@ export class DialogAsignacionesComponent implements OnInit {
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       this.data.asignacion.doc_respuesta = file.name;
+      this.data.asignacion.fecha_respuesta = new Date().toISOString();
+      console.log(this.data.asignacion.fecha_respuesta);
+    }
+
+  }
+
+  downloadFile() {
+    const fileName = this.data.asignacion.doc_respuesta;
+    if (fileName) {
+      // Lógica para descargar el archivo
+      // Por ejemplo, si el archivo está almacenado en una URL:
+      const url = `path/to/your/files/${fileName}`;
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName;
+      link.click();
     }
   }
 
@@ -116,6 +134,8 @@ export class DialogAsignacionesComponent implements OnInit {
 
     if(value.doc_respuesta != null){
       asignacion.doc_respuesta = value.doc_respuesta;
+      const buffer: any = new Date().toISOString();
+      asignacion.fecha_respuesta = buffer as Date;
     }
 
     this.editarAsignacion(asignacion);

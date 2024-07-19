@@ -29,6 +29,7 @@
         <input matInput readonly name="doc_respuesta" [(ngModel)]="data.asignacion.doc_respuesta">
         <button mat-button type="button" (click)="fileInput.click()">Subir Archivo</button>
         <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)">
+        <button mat-button type="button" If="data.asignacion.doc_respuesta" (click)="downloadFile()">Descargar Archivo</button>
     </mat-form-field>
 
     <mat-form-field appearance="outline" style="width: 100%;">

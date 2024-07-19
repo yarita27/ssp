@@ -12,70 +12,51 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
-import { CriterioComponent } from './criterio/criterio.component';
-import { IndicadoresComponent } from './indicadores/indicadores.component';
 import { AppComponent } from './app.component'; 
-import { MatrizAsignacionComponent } from './matriz-asignacion/matriz-asignacion.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
-
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-import { UnidadesComponent } from './unidades/unidades.component';
-import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { DialogUnidadesComponent } from './dialog-unidades/dialog-unidades.component';
-import { DialogCriteriosComponent } from './dialog-criterios/dialog-criterios.component';
-import { DialogIndicadoresComponent } from './dialog-indicadores/dialog-indicadores.component';
-import { DialogEditUnidadesComponent } from './dialog-edit-unidades/dialog-edit-unidades.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
+//import { AuthGuard } from './auth.guard';
+//import { AppRoutingModule } from './app.routes';
 
 @NgModule({
-  declarations: [
-  ],
   imports: [
-    BrowserModule,
-    RouterModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatInputModule,
-    MatTableModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatGridListModule,
-    CriterioComponent,
-    IndicadoresComponent,
-    MatrizAsignacionComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    MatPaginator,
-    BrowserAnimationsModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatDialogModule,
-    MatSelectModule,
-    UnidadesComponent,
-    MatPaginatorModule,
-    CommonModule,
-    MatTooltipModule,
-    DashboardComponent,
-    DialogUnidadesComponent,
-    DialogCriteriosComponent,
-    DialogIndicadoresComponent,
-    DialogEditUnidadesComponent,
-
-  ],
+      BrowserModule,
+      RouterModule,
+      MatToolbarModule,
+      MatIconModule,
+      MatButtonModule,
+      MatSidenavModule,
+      MatListModule,
+      MatInputModule,
+      MatTableModule,
+      MatCardModule,
+      MatFormFieldModule,
+      MatGridListModule,
+      FormsModule,
+      ReactiveFormsModule,
+      BrowserAnimationsModule,
+      MatPaginatorModule,
+      MatSortModule,
+      MatDialogModule,
+      MatSelectModule,
+      MatTabsModule,
+      CommonModule,
+      MatTooltipModule,
+      //AppRoutingModule,
+      AppComponent,
+      InicioSesionComponent,
+    ],
+    declarations: [
+    ],
   providers: [
+    //AuthGuard
   ],
-
 })
-export class AppModule {
-
-}
+export class AppModule { }
