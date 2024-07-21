@@ -101,6 +101,16 @@ export class UnidadesComponent implements AfterViewInit, OnInit{
       console.log(`Dialog result: ${result}`);
     });
   }
+  
+
+hidePassword(password: string): string {
+
+  // Implement the logic to hide the password here
+
+  return '********';
+
+}
+
 
   eliminarPrevio(value : any) : void{
     console.log(value);

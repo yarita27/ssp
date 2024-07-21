@@ -1,47 +1,41 @@
-<p>dashboard works!</p>
-
-<div style="width: 100%; height: 100%;">
-
-
+<div style="display: flex; flex-direction: column; padding: 20px;">
   <mat-card style="width: 100%; padding: 20px;">
-    <mat-form-field>
-          <mat-label>Filter</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-    </mat-form-field>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    
-      <!-- Position Column -->
-      <ng-container matColumnDef='id'>
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-      </ng-container>
-    
-      <!-- Name Column -->
-      <ng-container matColumnDef='nombre'>
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-      </ng-container>
-    
-      <!-- Weight Column -->
-      <ng-container matColumnDef='descripcion'>
-        <th mat-header-cell *matHeaderCellDef> Weight </th>
-        <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
-      </ng-container>
-    
-      <!-- Symbol Column -->
-      <ng-container matColumnDef='estado'>
-        <th mat-header-cell *matHeaderCellDef> Symbol </th>
-        <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    
-      <!-- Row shown when there is no matching data. -->
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-      </tr>
-    </table>
-    <mat-paginator [pageSizeOptions]="[5, 10]" aria-label="Select page of users"></mat-paginator>
+    <mat-card-header>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+    <div class="seleccion-anio">
+      <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
+        <mat-label>Años a Visualizar</mat-label>
+        <mat-select [(ngModel)]="anioPrueba" name="anio">
+          <mat-option *ngFor="let anio of aniosAsignados" [value]="anio">
+            {{ anio }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button (click)="seleccionarAnio(anioPrueba)" mat-raised-button color="primary" style="height: 50px; width: 100%;">Seleccionar Año</button>
+    </div>
+    <div class="lista-asignaciones">
+      <div *ngFor="let unidad of unidades">
+        <div *ngIf="unidad.id === miUnidad.id">
+          <h3 style="padding: 20px;">{{ unidad.id }} - {{ unidad.nombre }}</h3>
+          <ul>
+            <li *ngFor="let indicador of indicadores; let j = index" 
+                [ngClass]="{'recomendado': matriz[unidad.id][j].recomendado, 'completado': matriz[unidad.id][j].completado}">
+              <span>{{ indicador.id_criterio }}.{{ indicador.id }} - {{ indicador.nombre }}</span>
+              <span [ngClass]="{'recomendado': matriz[unidad.id][j].recomendado}">
+                {{ matriz[unidad.id][j].recomendado ? 'Recomendado' : '' }}
+              </span>
+              <span [ngClass]="{'completado': matriz[unidad.id][j].completado}" >
+                {{ matriz[unidad.id][j].completado ? 'Completado' : 'Incompleto' }}
+              </span>
+              <button mat-button (click)="modificarAsignacion(unidad.id, j)">Subir archivo</button>
+              <button mat-button (click)="descargarArchivo(indicador.doc_pregunta)">Descargar Indicador</button>
+              <!--<input type="file" (change)="subirArchivo($event, unidad.id, j)" />-->
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </mat-card>
 </div>

@@ -40,7 +40,7 @@
               <td>{{ unidad.id }} - {{ unidad.nombre }}</td>
               <td *ngFor="let indicador of indicadores; let j = index">
                 <button [ngClass]="{'recomendado': matriz[i][j].recomendado}" (click)="modificarDialog(matriz[i][j])">
-                  <mat-icon>edit</mat-icon>
+                  <mat-icon>{{ matriz[i][j].completado ? 'check' : 'edit' }}</mat-icon>
                 </button>
               </td>
             </tr>

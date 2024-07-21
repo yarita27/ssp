@@ -13,36 +13,43 @@ export const routes: Routes = [
 
     {
         path:"dashboard",
-        component:DashboardComponent
+        component:DashboardComponent,
+        data: { title: 'Asignaciones' }
     },
 
     {
         path:"unidades",
-        component:UnidadesComponent
+        component:UnidadesComponent,
+        data: { title: 'Gestion de Unidades' }
     },
 
     {
         path:"criterios",
-        component:CriterioComponent
+        component:CriterioComponent,
+        data: { title: 'Gestion de Criterios' }
     },
 
     {
         path:"indicadores",
-        component:IndicadoresComponent
+        component:IndicadoresComponent,
+        data: { title: 'Gestion de Indicadores' }
     },
 
     {
-        path:"asignar",
-        component:MatrizAsignacionComponent
+        path:"designar",
+        component:MatrizAsignacionComponent,
+        data: { title: 'Gestion de Matriz de Asignacion' }
     },
 
     {
         path:"asignaciones",
-        component:AsignacionesComponent
+        component:AsignacionesComponent,
+        data: { title: 'Matriz de Asignacion' }
     }, 
 
     {
         path:"otro",
-        component:OtroComponent
+        component:OtroComponent,
+        data: { title: 'Otros' }
     }, 
 ];

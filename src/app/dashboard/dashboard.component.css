@@ -7,4 +7,34 @@ table {
     font-size: 14px;
     width: 100%;
   }
+  .recomendado {
+    font-weight: bold;
+    color: green;  
+    background-color: rgb(198, 241, 198);
+  }
   
+  .completado {
+    text-decoration: line-through;
+  }
+  
+  
+  .lista-asignaciones ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .lista-asignaciones li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .lista-asignaciones li span {
+    flex: 1;
+  }
+  
+  .lista-asignaciones li button {
+    margin-left: 10px;
+  }

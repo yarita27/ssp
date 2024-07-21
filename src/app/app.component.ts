@@ -11,6 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 import { RestService } from './rest.service';
 import { CommonModule } from '@angular/common';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -34,10 +36,37 @@ import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 export class AppComponent {
   title = 'ssp';
   showFiller = false;
-  pageTitle!: String;
   isLoggedIn = false;
+  pageTitle = '';
+  userName = '';
+  userType = ''; // 'admin' o 'unidad'
 
-  onLoginSuccess() {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.setPageTitle();
+    });
+
+    // Simulación de inicio de sesión
+    //this.onLoginSuccess('admin', 'Henrri Uzcategui');
+    // o
+     this.onLoginSuccess('unidad', 'MARIO LOPEZ');
+  }
+
+  onLoginSuccess(userType: string, userName: string) {
     this.isLoggedIn = true;
+    this.userType = userType;
+    this.userName = userName;
+  }
+
+  setPageTitle() {
+    const route = this.activatedRoute.firstChild;
+    if (route) {
+      const routeData = route.snapshot.data;
+      this.pageTitle = routeData['title'] || '';
+    }
   }
 }

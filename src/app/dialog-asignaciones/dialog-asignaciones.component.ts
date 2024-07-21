@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormField, MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import { MatLabel } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -63,8 +63,22 @@ export class DialogAsignacionesComponent implements OnInit {
   unidadesSeleccionadas: Unidad[] = [];
 
   chequeado: boolean = true;
-
+  /*data: any = {
+    asignacion: {
+      anio: '',
+      id_criterio: '',
+      id_indicador: '',
+      id_unidad: '',
+      doc_respuesta: '',
+      recomendado: false,
+      completado: false
+    },
+    indicador: {
+      doc_pregunta: ''
+    }
+  };*/
   constructor(
+    public dialogRef: MatDialogRef<DialogAsignacionesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private restService: RestService,
     private fb: FormBuilder
@@ -94,6 +108,22 @@ export class DialogAsignacionesComponent implements OnInit {
     }
   }
 
+  onFileSelectedPregunta(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      // Manejar el archivo seleccionado
+      this.data.indicador.doc_pregunta = file.name;
+      // Puedes agregar lógica adicional para subir el archivo al servidor
+    }
+  }
+
+  downloadFilePregunta(): void {
+    const fileName = this.data.indicador.doc_pregunta;
+    // Lógica para descargar el archivo
+    // Por ejemplo, podrías hacer una solicitud HTTP para obtener el archivo desde el servidor
+  }
+
   ngOnInit(): void {
     this.cargarCriteriosActivos();
     this.cargarUnidadesActivas();
@@ -120,7 +150,8 @@ export class DialogAsignacionesComponent implements OnInit {
   }
 
   editarPrevio(value: any){
-    console.log(value);
+  
+
     let asignacion : Asignacion = {
       id_unidad: value.id_unidad,
       id_indicador: value.id_indicador,
@@ -141,6 +172,9 @@ export class DialogAsignacionesComponent implements OnInit {
     this.editarAsignacion(asignacion);
     console.log("Editando Asignacion...");
     console.log(asignacion);
+
+    this.dialogRef.close(value);
+    
   }
 
   editarAsignacion(value : Asignacion) : void{

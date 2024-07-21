@@ -67,4 +67,82 @@ export class DialogEditIndicadoresComponent implements OnInit{
       }
     );
   };
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+        const file = input.files[0];
+        // Manejar el archivo seleccionado
+        this.data.indicador.doc_pregunta = file.name;
+        // Puedes agregar lógica adicional para subir el archivo al servidor
+    }
+
+  }
+
+  downloadFile(): void {
+    const fileName = this.data.indicador.doc_pregunta;
+    // Lógica para descargar el archivo
+    // Por ejemplo, podrías hacer una solicitud HTTP para obtener el archivo desde el servidor
+  }
 }
+
+/*
+downloadFile() {
+  const fileName = this.data.indicador.doc_pregunta;
+  if (fileName) {
+    // Lógica para descargar el archivo
+    // Por ejemplo, si el archivo está almacenado en una URL:
+    const url = `path/to/your/files/${fileName}`;
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    link.click();
+  }
+}
+
+onFileSelected(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    const file = input.files[0];
+    this.data.indicador.doc_pregunta = file.name;
+  }
+
+}
+
+
+cargarCriteriosActivos() : void{
+  this.restService.getCriteriosActivos().subscribe({
+    next: (result : any) => {
+      this.criteriosActivos = result;
+    },
+    error : (err) => {
+      console.error(err);
+    }
+  });
+}
+
+registrarIndicador(value : Indicador) : void{
+  this.restService.postIndicador(value).subscribe(
+    (result) => {
+      console.log(result);
+    }
+  );
+
+};
+
+registrarPrevio(value: any) : void{
+
+  let indicador : Indicador = {
+    id: value.id,
+    id_criterio: value.id_criterio,
+    nombre: value.nombre,
+    descripcion: value.descripcion,
+    estado: true,
+    doc_pregunta: ''
+  };
+  if(value.doc_pregunta != null){
+    indicador.doc_pregunta = value.doc_pregunta;
+  }
+  this.registrarIndicador(value);
+}
+  */

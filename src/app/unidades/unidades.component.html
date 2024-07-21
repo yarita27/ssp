@@ -1,7 +1,7 @@
 <div class="unidades-container">
-  <h3 style="justify-content: center; padding-left: 20px;">Gestión de Unidades</h3>
+  <!--   <h3 style="justify-content: center; padding-left: 20px;">Gestión de Unidades</h3>
   
-  <!-- <mat-card style= "display : flex; width: 100%;  padding: 20px; justify-content: space-between; margin-top: 20px;"></mat-card>  -->
+<mat-card style= "display : flex; width: 100%;  padding: 20px; justify-content: space-between; margin-top: 20px;"></mat-card>  -->
 
 
   <mat-card style="width: 100%; padding: 20px; display: flex; justify-content: space-between; margin-top: 20px;">
@@ -46,7 +46,7 @@
       <!-- Contrasenia Column -->
       <ng-container matColumnDef="contrasena">
         <th mat-header-cell *matHeaderCellDef> Contraseña </th>
-        <td mat-cell *matCellDef="let element"> {{element.contrasena}} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.contrasena ? hidePassword(element.contrasena) : '' }}</td>
       </ng-container>
 
       <!-- Estado Column -->

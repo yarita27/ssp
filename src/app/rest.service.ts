@@ -74,6 +74,10 @@ export class RestService {
     return this.http.get<any>(this.urlApi + '/unidad').pipe(res=>res);
   }
 
+  getUnidadById(id : number) : Observable <Unidad>{
+    return this.http.get<Unidad>(this.urlApi + '/unidad/' + id).pipe(res=>res);
+  }
+
   getUnidadesActivas() : Observable <Unidad[]>{
     return this.http.get<Unidad[]>(this.urlApi + '/unidad/activos').pipe(res=>res);
   }
@@ -99,6 +103,10 @@ export class RestService {
 
   getAsignacionesByAnio(anio: number): Observable<any> {
     return this.http.get<any>(`${this.urlApi}/asignacion/${anio}`).pipe(res => res);
+  }
+
+  getAsignacionesByAnioUnidad(anio: number, id_unidad: number): Observable<Asignacion[]> {
+    return this.http.get<Asignacion[]>(`${this.urlApi}/asignacion/asignaciones/${anio}/${id_unidad}`).pipe(res => res);
   }
 
   getAniosAsignados(): Observable <any> {

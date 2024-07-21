@@ -14,6 +14,22 @@
     flex: 1 1 auto;
   }
   
+  .user-name {
+    font-size:medium; /* Tamaño de fuente mediano */
+    font-family: 'Arial', sans-serif; /* Mejor estilo de fuente */
+    color: black; /* Color de texto */
+    font-weight: bold; /* Negrita para mejor visibilidad */
+    background-color:#8BC34A;
+  }
+
+  .page-title{
+    font-size: large; /* Tamaño de fuente grande */
+    font-family: 'Arial', sans-serif; /* Mejor estilo de fuente */
+    color: black; /* Color de texto */
+    font-weight: bold; /* Negrita para mejor visibilidad */
+    background-color: #8BC34A;
+  }
+
   .example-container {
     width: 100%;
     height: 100%;
